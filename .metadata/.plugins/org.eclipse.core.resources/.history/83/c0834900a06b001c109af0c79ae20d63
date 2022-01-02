@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- root-context.xml
+		web.xml 파일이 가장 먼저 읽어 들이는 설정 파일.
+		프로젝트 전체에 공유되는 자원(DB연결, 트랜잭션처리, 파일 업로드 등)
+	 -->
+		
+</beans>
