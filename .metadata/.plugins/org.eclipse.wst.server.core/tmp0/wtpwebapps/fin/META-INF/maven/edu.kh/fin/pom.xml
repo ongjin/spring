@@ -12,7 +12,7 @@
 	<!-- properties : 메이븐이 적용된 프로젝트에서 공통적으로 사용할 버전 또는 설정값 정보를 작성하는 태그 -->
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>5.2.8.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.10.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.4</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
@@ -21,6 +21,23 @@
 	<!-- dependencies : Maven 프로젝트는 외부 저장소와 의존 관계를 맺고 있어 프로젝트에 필요한 파일을(라이브러리) 
 		사용자가 직접 받을 필요 없이 해당 태그 내에 지정된 형식으로 작성하면 네트워크를 통해 외부 저장소에서 자동으로 얻어와 세팅함 -->
 	<dependencies>
+		<!-- 암호화를 위한 Spring Security -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+
+
+
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -126,8 +143,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
-	
+
+
 	<!-- build : 프로젝트 빌드 시 사용되는 플러그인 추가 및 버전 정보 설정 -->
 	<build>
 		<plugins>
@@ -165,6 +182,14 @@
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
 			</plugin>
+
+			<!-- Could not initialize class org.apache.maven.plugin.war.util.WebappStructureSerializer -->
+			<!-- 메이븐 구성 문제로 인한 pom.xml 문제 해결 -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+			</plugin>
+			
 		</plugins>
 	</build>
 </project>
