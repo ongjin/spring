@@ -57,7 +57,7 @@
 							<%-- 로그인이 되어 있을 때 --%>
 							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/myPage">${sessionScope.loginMember.memberName}</a></li>
 							<li class="nav-item active"><a class="nav-link" href="${contextPath}/member/logout">Logout</a></li>
-																				<!-- /semi/member/logout 으로 요청 (a태극 모두 get방식)  -->
+																				<!-- /fin/member/logout 으로 요청 (a태극 모두 get방식)  -->
 						</c:otherwise>
 					
 					</c:choose>

@@ -1,13 +1,20 @@
 package edu.kh.fin.member.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.fin.member.model.service.MemberService;
 import edu.kh.fin.member.model.vo.Member;
@@ -31,6 +38,8 @@ import edu.kh.fin.member.model.vo.Member;
 @Controller // 프레젠테이션 레이어, 웹앱에 전달된 요청과 응답을 처리하는 역할임을 명시 + Bean 등록
 
 @RequestMapping("/member/*") // /fin/member/ 로 시작하는 모든 요청을 받아서 처리하는 컨트롤러
+
+@SessionAttributes({"loginMember"}) // Model 속성 중 loginMember가 request -> session 범위 변경
 public class MemberController {
 	
 	// @Autowired
@@ -123,13 +132,96 @@ public class MemberController {
 	// 5. @ModelAttribute 생략
 	
 	@RequestMapping(value = "login", method = RequestMethod.POST) 
-	public String login5( Member member ) {
+	public String login5( Member member, Model model, RedirectAttributes ra, 
+			@RequestParam(value="save", required = false) String save, HttpServletRequest req,
+			HttpServletResponse resp) {
+		
 		System.out.println(member.getMemberId());
 		System.out.println(member.getMemberPw());
 		
 		Member loginMember = service.login(member);
 		
+		// Service 수행 결과에 따라 응답 처리
+		if(loginMember != null) {
+			
+			// loginMember Session 추가하기
+			
+			// Model : 데이터를 K:V 형태로 담아서 전달하는 용도의 객체
+			// -> page, request, session, application고 사용 방법이 유사함.
+			// --> Controller 위쪽에 @SessionAttributes 어노테이션을 작성하면
+			// key가 일치하는 model의 속성을 session 범위로 이동 시킴
+			model.addAttribute("loginMember", loginMember);
+			
+			//******************************************************************************
+			// 아이디 저장 Cookie 생성
+			
+			// 1. Cookie 객체 생성(K:V 형태로 저장할 값 지정)
+			Cookie cookie = new Cookie("saveId", loginMember.getMemberId());
+			
+			// 2. 쿠키 유지 시간 지정
+			if(save != null) {
+				cookie.setMaxAge(60 * 60 * 24 * 30); // 초 단위
+			}else {
+				cookie.setMaxAge(0); // 0초
+				// -> 쿠키가 생성 되자마자 사라짐 --> 기존 쿠키를 새로 생성된 쿠키가 덮어 씌우고 사라지게 됨 == 삭제
+			}
+			
+			// 3. 쿠키 적용 경로(범위)
+			// 최상위 경로 지정 --> 어디서든 쿠키 사용 가능
+			cookie.setPath(req.getContextPath());
+			
+			// 4. 응답 객체에 생성한 쿠키를 추가하여 클라이언트로 전달
+			resp.addCookie(cookie);
+			
+			
+			
+			
+			//******************************************************************************
+			
+		}else {
+			
+			// RedirectAttributes : 리다이렉트 시 request 범위로 값을 전달할 수 있는 객체
+			
+			// RedirectAttributes에 값 세팅 : request scope
+			// 리다이렉트 시 : request -> session으로 잠시 이동
+			// 응답 완료 시 : session -> request 복귀
+			
+			ra.addFlashAttribute("message", "아이디 또는 비밀번호를 확인해 주세요");
+			
+		}
+		
 		return "redirect:/";
 	}
+	
+	
+	
+	// 로그아웃 : 세션에 있는 회원 정보를 제거 -> 세션 자체를 없애는 것이 효율적
+	@RequestMapping("/logout")
+	public String logout(SessionStatus status) {
+		
+		// session.invalidate();
+		// -> req.getSession()을 통해서 얻어온 Session만 만료됨
+		// --> @SessionAttributes + model.addAttribute() 작성된 세션은 별도 만료 방법이 존재함.
+		
+		// SessionStatus : 세션 상태 관리 객체
+		// -> @SessionAttributes를 통해 등록된 session을 관리할 수 있음.
+		
+		status.setComplete(); // 세션 만료
+		
+		
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
