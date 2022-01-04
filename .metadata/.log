@@ -1337,3 +1337,12 @@ java.lang.UnsupportedOperationException: Attempting to install a second facet ve
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2022-01-04 10:35:34.266
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2022-01-04 10:46:56.319
+!MESSAGE Unexpected URLConnection defaultUseCaches enabled
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-01-04 10:46:56.321
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2022-01-04 10:46:56.325
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
