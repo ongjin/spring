@@ -123,7 +123,7 @@
 						<button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
 
 
-						<a class="btn btn-lg btn-secondary btn-block" href="${contextPath}/member/signup">회원가입</a>
+						<a class="btn btn-lg btn-secondary btn-block" href="${contextPath}/member/signUp">회원가입</a>
 					</form>
 				</div>
 				

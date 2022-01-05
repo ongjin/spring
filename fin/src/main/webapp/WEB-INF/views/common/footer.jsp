@@ -15,6 +15,9 @@
 <!-- Bootstrap4 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
+<!-- sweetalert : 경고창 api -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- 공용 JS -->
 <script src="${contextPath}/resources/js/final.js"></script>
 
@@ -29,3 +32,25 @@
 			// 일치하는 속성이 있으면 출력
 	</script>
 </c:if>
+
+<%-- request scope에 "title" 라는 키값이 존재하는 경우 --%>
+<c:if test="${!empty requestScope.title}">
+	<script>
+		swal({
+			title: "${title}",
+			text: "${text}",
+			icon: "${icon}",
+			button:"${button}"
+		});
+	</script>
+</c:if>
+
+
+
+
+
+
+
+
+
+

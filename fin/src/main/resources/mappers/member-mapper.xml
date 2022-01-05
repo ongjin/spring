@@ -42,7 +42,7 @@
 							알맞게 매핑시켜둔 <resultMap> id 값 작성
 	-->
 	<!-- 
-		마이바티으세어 사용하는 "#", "$" 기호
+		마이바티스에서 사용하는 "#", "$" 기호
 		"#" : pstmt		/ "$" : stmt
 		
 		ex) 전달 받은 파라미터 memberId = "user01"
@@ -56,5 +56,23 @@
 		AND STATUS_CD = 1 
 		AND GRADE_CD = 1
 	</select>
+	
+	<!-- 아이디 중복 검사 -->
+	<select id="idDUpCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MEMBER_ID = #{inputId} AND STATUS_CD != 2
+	</select>
+	
+	<select id="emailDupCheck" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER 
+		WHERE MEMBER_EMAIL = #{inputEmail} AND STATUS_CD != 2
+	</select>
+	
+	<insert id="signUp" parameterType="Member">
+		INSERT INTO MEMBER VALUES(
+			SEQ_MEMBER_NO.NEXTVAL, #{memberId}, #{memberPw}, #{memberName}, #{memberPhone},
+			#{memberEmail}, #{memberAddress}, DEFAULT, DEFAULT, DEFAULT
+		)
+	</insert>
 	
 </mapper>

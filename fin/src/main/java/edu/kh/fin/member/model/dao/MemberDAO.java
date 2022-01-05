@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.kh.fin.member.model.vo.Member;
 
-@Repository // Persistance layer, 영속성을 가지는 속성(파일, DB)을 제어하는 클래스 + Bean 등록
+@Repository
 public class MemberDAO {
 	
 	@Autowired // bean으로 등록된 SqlSessionTemplate 객체 의존성 주입(DI)
@@ -24,5 +24,30 @@ public class MemberDAO {
 		Member loginMember = sqlSession.selectOne("memberMapper.login", memberId);
 		
 		return loginMember;
+	}
+
+	/** 아이디 중복 검사
+	 * @param inputId
+	 * @return result
+	 */
+	public int idDupCheck(String inputId) {
+		
+		return sqlSession.selectOne("memberMapper.idDUpCheck", inputId);
+	}
+
+	/** 이메일 중복 검사
+	 * @param inputEmail
+	 * @return result
+	 */
+	public int emailDupCheck(String inputEmail) {
+		return sqlSession.selectOne("memberMapper.emailDupCheck", inputEmail);
+	}
+
+	/** 회원가입
+	 * @param member
+	 * @return member
+	 */
+	public int signUp(Member member) {
+		return sqlSession.insert("memberMapper.signUp", member);
 	}
 }

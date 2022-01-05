@@ -64,4 +64,10 @@
 		<item value="org.springframework.ide.eclipse.webflow.feature:3.9.20.202112202132-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.xml.namespaces.feature:4.13.0.202112031748"/>
 	</list>
+	<section name="CleanDialogSettings">
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="500"/>
+		<item key="DIALOG_HEIGHT" value="389"/>
+		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
 </section>

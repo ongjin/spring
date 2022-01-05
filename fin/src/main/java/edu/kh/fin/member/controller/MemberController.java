@@ -1,5 +1,7 @@
 package edu.kh.fin.member.controller;
 
+import java.net.http.HttpRequest;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -196,7 +200,7 @@ public class MemberController {
 	
 	
 	// 로그아웃 : 세션에 있는 회원 정보를 제거 -> 세션 자체를 없애는 것이 효율적
-	@RequestMapping("/logout")
+	@RequestMapping("logout")
 	public String logout(SessionStatus status) {
 		
 		// session.invalidate();
@@ -213,7 +217,109 @@ public class MemberController {
 	}
 	
 	
+	// 회원가입 페이지 전환
+	@RequestMapping(value = "signUp", method = RequestMethod.GET)
+	public String signUp() {
+		
+		return "member/signUp";
+	}
 	
+	
+	
+	/* @ResponseBody
+	 * - 메소드에서 반환되는 값이 forward를 위한 jsp 이름, redirect 주소가 아닌
+	 * 값 자체임을 알려주는 어노테이션 --> ajax를 이용한 데이터 응답 시 사용
+	*/
+	// 아이디 중복 검사(ajax)
+	@RequestMapping(value = "idDupCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idDUpCheck(String inputId) {
+		
+		// @RequestPAram 생략을 원하는 경우 피라미터가 null이 넘어오는지 확인
+		// -> 안넘어오면 생략 가능
+		
+		// 아이디 중복 검사 Service 호출 후 결과 반환 받기
+		// int result = service.idDupCheck(inputId);
+		
+		
+		return service.idDupCheck(inputId);
+	}
+	
+	
+	@RequestMapping(value= "emailDupCheck", method=RequestMethod.GET)
+	@ResponseBody
+	public int emailDupCheck(String inputEmail) {
+		return service.emailDupCheck(inputEmail);
+	}
+	
+	
+	// 회원가입
+	@RequestMapping(value = "signUp", method = RequestMethod.POST)
+	public String signUp(Member member, RedirectAttributes ra) {
+						// -> 커맨드객체   -> RedirectAttributes : redirect 시 데이터 전달용 객체
+		int result = service.signUp(member);
+		
+		// 메세지 전달용 변수 선언
+		String title;
+		String text;
+		String icon;
+		String button;
+		
+		if(result > 0) {
+			title = "회원 가입 성공";
+			text = member.getMemberName() + "님의 회원 가입을 환영합니다";
+			icon = "success";
+			button = "확인";
+		}else {
+			title = "회원 가입 실패";
+			text = "관리자에게 문의해주세요.";
+			icon = "error";
+			button = "실패";
+		}
+		
+		ra.addFlashAttribute("title", title);
+		ra.addFlashAttribute("text", text);
+		ra.addFlashAttribute("icon", icon);
+		ra.addFlashAttribute("button", button);
+		
+		return "redirect:/";
+	}
+	
+	
+	
+	
+	/* Spring 예외 처리 방법
+	 * 											| 우선 순위
+	 * 1. 메소드별 try-catch / throws 예외처리		(1순위)
+	 * 2. 컨트롤러 별로 예외 처리(@ExceptionHandler)	(2순위)
+	 * 		-> DispatcherServlet(servlet-context.xml)에 <annotaion-driven/>이 수행되어야 사용 가능
+	 * 3. 전역(모든 클래스)에서 발생하는 예외를 하나의 클래스에서 처리
+	 * 		@ControllerAdvice 					(3순위)
+	*/
+	
+	
+	// @ExceptionHandler(처리할 예외.class)
+	@ExceptionHandler(Exception.class)
+	public String exceptionHandler(Exception e, Model model) {
+		
+		// Model : 데이터 전달용 객체(Map 형식, 기본 값 : request)
+		model.addAttribute("errorMessage", "회원관련 서비스 이용중 문제가 발생했습니다.");
+		model.addAttribute("e", e);
+		
+		return "common/error";
+	}
+	
+	@RequestMapping(value="myPage", method= RequestMethod.GET)
+	public String myPage() {
+		
+		return "member/myPage";
+	}
+	
+	@RequestMapping(value="update", method= RequestMethod.GET)
+	public String update(Member member) {
+		int result = service.update()
+		return "member/update";
+	}
 	
 	
 	

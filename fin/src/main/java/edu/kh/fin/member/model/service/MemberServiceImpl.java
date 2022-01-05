@@ -3,6 +3,7 @@ package edu.kh.fin.member.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.fin.member.model.dao.MemberDAO;
 import edu.kh.fin.member.model.vo.Member;
@@ -52,5 +53,57 @@ public class MemberServiceImpl implements MemberService {
 		
 		return loginMember;
 	}
+
+	// 아이디 중복 체크
+	@Override
+	public int idDupCheck(String inputId) {
+		return dao.idDupCheck(inputId);
+	}
+
+	// 이메일 중복 체크
+	@Override
+	public int emailDupCheck(String inputEmail) {
+		return dao.emailDupCheck(inputEmail);
+	}
+
+	// 회원가입
+	// rollbackFor 속성 : 어떤 예외 발생 시 롤백을 수행할 지 지정
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int signUp(Member member) {
+		member.setMemberPw(encoder.encode(member.getMemberPw()));
+		
+		return dao.signUp(member);
+		
+		// 트랜잭션 처리 @Transcational
+		
+		/* 스프링에서 트랜잭션을 처리하는 방법
+		 * 1. 코드 기반 처리 방법 (기존 commit, rollback)
+		 * 2. 선언적 트랜잭션 처리 방법
+		 * 	1) <tx:advice> XML 방식
+		 * 	2) @Transcational 어노테이션 방식
+		 * 		- 트랜잭션 매니저가 Bean으로 등록 되어있어야 함
+		 * 		- @Transcational 어노테이션을 인식하기 위한 <tx:annotation-driven/> 태그가 존재해야 함.
+		 * 
+		 * @Transcational 어노테이션은 rollback을 위한 어노테이션
+		 * 왜 커밋은 안하지? 커넥션 반환 시 아무런 트랜잭션 처리가 되어있지 않다면 자동 commit
+		 * 
+		 * @Transcational 어노테이션은 RuntimeException이 발생했을 때 Rollback을 수행함
+		*/
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
