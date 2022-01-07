@@ -1,0 +1,311 @@
+unit s2e0x3U1n9i8t;
+
+interface
+
+uses
+  WinApi.Windows, Vcl.Graphics, AddreUnit, Me2m4o1ryUnit, Auto1Bot3Unit,
+  System.SysUtils, Math, WinApi.D3DX9, WinApi.Direct3D9, WinApi.DXTypes,
+  ShellAPI;
+
+Procedure MSHi18j5ac2ki6ng_Main;
+Procedure Pai1dw2ndd;
+Procedure Start_MsPaint;
+Procedure Pa8i1;
+
+
+Function SexView(VectorWorld: TD3DXVector3; out Screen: TD3DXVector3): Boolean;
+
+type
+  DWM_BLURBEHIND = record
+    Flags: DWORD;
+    Enable: BOOL;
+    RgnBlur: HRGN;
+    TransitionOnMaximized: BOOL;
+    X, Z, Y: Single;
+    K, T, U, I: Byte;
+    A: String;
+  end;
+
+var
+  MSpaint_HWND: HWND;
+  _Handle: THandle;
+  Back8erBp8I1fo: BITMAPINFO;
+  Ba0k8uf0xels: Pointer;
+  LRect: TRect;
+  Me05tmap: HBITMAP;
+  Main80c, M0hd0c: HDC;
+
+implementation
+
+uses
+  Main1F0mer;
+
+function RMS(Address, Len: DWORD): AnsiString;
+var
+  I: Integer;
+  ArrStr: Array of AnsiChar;
+  Bytez: NativeUint;
+begin
+  Result := '';
+  SetLength(ArrStr, Len);
+  ReadProcessMemory(hProcess, Pointer(Address), ArrStr, Len, Bytez);
+  for I := 0 to Len - 1 do
+  begin
+    if ArrStr[I] = '' then
+      break;
+    Result := Result + ArrStr[I];
+  end;
+end;
+
+Function MSpaint: HWND;
+Var
+  Rgn: HRGN;
+  BlurBehind: DWM_BLURBEHIND;
+begin
+  _Handle := FindWindow('notepad', nil);
+
+  SetMenu(_Handle, 0);
+  SetWindowLongPtr(_Handle, GWL_STYLE, WS_VISIBLE);
+  SetWindowLongPtr(_Handle, GWL_EXSTYLE, WS_EX_LAYERED or
+    WS_EX_TRANSPARENT or WS_EX_NOACTIVATE or WS_EX_TOOLWINDOW);
+  SetWindowPos(_Handle, HWND_TOPMOST, 0, 0,
+    GetSystemMetrics(SM_CXSCREEN), GetSystemMetrics(SM_CYSCREEN),
+    SWP_SHOWWINDOW);
+  SetLayeredWindowAttributes(_Handle, RGB(0, 0, 0), 0, LWA_COLORKEY);
+
+
+  Result := _Handle;
+end;
+
+Procedure MSHi18j5ac2ki6ng_Main;
+Begin
+  MSpaint_HWND := MSpaint;
+
+  mainForm.S5K1T.Enabled := True;
+End;
+
+Procedure Start_MsPaint;
+begin
+Shellexecute(0, 'open', 'cmd.exe', '/C start notepad.exe', nil, SW_Hide);
+end;
+
+
+Procedure Pai1dw2ndd;
+begin
+  WinExec('C:\Windows\notepad.exe', SW_Show); // 폴더 이름 + 인젝터 이름
+end;
+
+Procedure Pa8i1;
+begin
+  KillProcess('C:\Notepad\notepad.exe'); // 폴더 이름 + 인젝터 이름
+end;
+
+Function SexView(VectorWorld: TD3DXVector3; out Screen: TD3DXVector3): Boolean;
+var
+  Pr0jectionR2ad, ViewR2ad: Array [0 .. 15] of Single;
+  P8oj11t4on, Vi01e0w, Wo0r00ld: TD3DXMatrix;
+  V1i8ewprt_: TD3DViewport9;
+begin
+  Result := False;
+  ReadProcessMemory(hProcess, Pointer(ViewPort - $80), @ViewR2ad,
+    SizeOf(ViewR2ad), PNativeUInt(nil)^);
+  Vi01e0w := _D3DMATRIX(ViewR2ad);
+  ReadProcessMemory(hProcess, Pointer(ViewPort - $40), @Pr0jectionR2ad,
+    SizeOf(Pr0jectionR2ad), PNativeUInt(nil)^);
+  P8oj11t4on := _D3DMATRIX(Pr0jectionR2ad);
+  ReadProcessMemory(hProcess, Pointer(ViewPort), @V1i8ewprt_, SizeOf(V1i8ewprt_),
+    PNativeUInt(nil)^);
+  D3DXMatrixIdentity(Wo0r00ld);
+  D3DXVec3Project(Screen, VectorWorld, V1i8ewprt_, P8oj11t4on, Vi01e0w, Wo0r00ld);
+  if Screen.Z < 1 then
+    Result := True;
+end;
+
+procedure ESpDrawString(MemDC: HDC; X, Y: Integer; Text: string; Color: TColor);
+var
+  hN1eF0on0t, hOTi81tle2F8ont: HFONT;
+  lf0o1n9t: TLogFont;
+begin
+  ZeroMemory(@lf0o1n9t, SizeOf(TLogFont));
+  lf0o1n9t.lfOutPrecision := OUT_TT_ONLY_PRECIS;
+  lf0o1n9t.lfFaceName := '돋움';
+  lf0o1n9t.lfHeight := 12;
+  hN1eF0on0t := CreateFontIndirect(lf0o1n9t);
+  hOTi81tle2F8ont := SelectObject(MemDC, hN1eF0on0t);
+  SetTextAlign(MemDC, TA_NOUPDATECP or TA_CENTER);
+  SetBkMode(MemDC, TRANSPARENT);
+  SetTextColor(MemDC, Color);
+  TextOutW(MemDC, X, Y, PChar(Text), Length(Text));
+  SelectObject(MemDC, hOTi81tle2F8ont);
+  DeleteObject(hN1eF0on0t);
+end;
+
+Procedure SexLine(StartX, StartY, EndX, EndY: Integer; Pen: COLORREF);
+var
+  FP1n9: HPEN;
+begin
+  FP1n9 := SelectObject(M0hd0c, CreatePen(PS_SOLID, 1, Pen));
+  MoveToEx(M0hd0c, StartX, StartY, nil);
+  LineTo(M0hd0c, EndX, EndY);
+  DeleteObject(SelectObject(M0hd0c, FP1n9));
+end;
+
+Function BoneOffset(N0a1m0e: String): Integer;
+begin
+  If N0a1m0e = 'Bip01 Head' then
+    Result := 0;
+  If N0a1m0e = 'Bip01 L Clavicle' then
+    Result := 1;
+  If N0a1m0e = 'Bip01 L UpperArm' then
+    Result := 2;
+  If N0a1m0e = 'Bip01 L Forearm' then
+    Result := 3;
+  If N0a1m0e = 'Bip01 L Hand' then
+    Result := 4;
+  If N0a1m0e = 'Bip01 R Clavicle' then
+    Result := 5;
+  If N0a1m0e = 'Bip01 R UpperArm' then
+    Result := 6;
+  If N0a1m0e = 'Bip01 R Forearm' then
+    Result := 7;
+  If N0a1m0e = 'Bip01 R Hand' then
+    Result := 8;
+  If N0a1m0e = 'Bip01 Neck' then
+    Result := 9;
+  If N0a1m0e = 'Bip01 Spine2' then
+    Result := 10;
+  If N0a1m0e = 'Bip01 Spine1' then
+    Result := 11;
+  If N0a1m0e = 'Bip01 Spine' then
+    Result := 12;
+  If N0a1m0e = 'Bip01 Pelvis' then
+    Result := 13;
+  If N0a1m0e = 'Bip01 R Thigh' then
+    Result := 14;
+  If N0a1m0e = 'Bip01 R Calf' then
+    Result := 15;
+  If N0a1m0e = 'Bip01 R Foot' then
+    Result := 16;
+  If N0a1m0e = 'Bip01 R Toe0' then
+    Result := 17;
+  If N0a1m0e = 'Bip01 L Thigh' then
+    Result := 18;
+  If N0a1m0e = 'Bip01 L Calf' then
+    Result := 19;
+  If N0a1m0e = 'Bip01 L Foot' then
+    Result := 20;
+  If N0a1m0e = 'Bip01 L Toe0' then
+    Result := 21;
+end;
+
+Procedure Bo10n11e(Vec8t1or0: Array of Single; Fi0rs1tNo0d0e, SN1o8de: String;
+  Color: TColor);
+var
+  O1f0f51, O1f5f32: Integer;
+  S3t1ar2t, _S1ta8r0t, W120S, _W122S2: TD3DXVector3;
+begin
+  O1f0f51 := BoneOffset(Fi0rs1tNo0d0e);
+  O1f5f32 := BoneOffset(SN1o8de);
+
+  S3t1ar2t.X := Vec8t1or0[O1f0f51 * $10];
+  S3t1ar2t.Y := Vec8t1or0[O1f0f51 * $10 + 1];
+  S3t1ar2t.Z := Vec8t1or0[O1f0f51 * $10 + 2];
+  W120S.X := Vec8t1or0[O1f5f32 * $10];
+  W120S.Y := Vec8t1or0[O1f5f32 * $10 + 1];
+  W120S.Z := Vec8t1or0[O1f5f32 * $10 + 2];
+
+  if SexView(S3t1ar2t, _S1ta8r0t) and SexView(W120S, _W122S2) then
+    SexLine(Round(_S1ta8r0t.X), Round(_S1ta8r0t.Y), Round(_W122S2.X),
+      Round(_W122S2.Y), Color);
+end;
+
+Procedure Skeleton(h1Ob2j: DWORD; Color: TColor);
+var
+  P1Mat2821r9i0x: DWORD;
+  N5011deV2ct0r: Array [0 .. $152] of Single;
+begin
+  P1Mat2821r9i0x := GetPla8ye1rMa9trix(h1Ob2j, 'Bip01 Head');
+  if P1Mat2821r9i0x <> 0 then
+  begin
+    ReadProcessMemory(hProcess, Pointer(P1Mat2821r9i0x), @N5011deV2ct0r,
+      SizeOf(N5011deV2ct0r), PNativeUInt(nil)^);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Head', 'Bip01 L Clavicle', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L Clavicle', 'Bip01 L UpperArm', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L UpperArm', 'Bip01 L Forearm', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L Forearm', 'Bip01 L Hand', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Head', 'Bip01 R Clavicle', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R Clavicle', 'Bip01 R UpperArm', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R UpperArm', 'Bip01 R Forearm', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R Forearm', 'Bip01 R Hand', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Head', 'Bip01 Neck', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Neck', 'Bip01 Spine2', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Spine2', 'Bip01 Spine1', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Spine1', 'Bip01 Spine', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Spine', 'Bip01 Pelvis', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Pelvis', 'Bip01 R Thigh', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R Thigh', 'Bip01 R Calf', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R Calf', 'Bip01 R Foot', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 R Foot', 'Bip01 R Toe0', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 Pelvis', 'Bip01 L Thigh', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L Thigh', 'Bip01 L Calf', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L Calf', 'Bip01 L Foot', Color);
+    Bo10n11e(N5011deV2ct0r, 'Bip01 L Foot', 'Bip01 L Toe0', Color);
+  end;
+end;
+
+Procedure DrawCircle(DC: HDC);
+var
+  Ca9n102v1as : TCanvas;
+  Width, Height, CenterX, CenterY: Integer;
+  SuddenAttack_HWND: HWND;
+  TSize: TRect;
+begin
+  SuddenAttack_HWND := FindWindow(nil, 'SuddenAttack');
+  GetWindowRect(MSPaint_HWND, TSize);
+  Width := TSize.Right - TSize.Left;
+  Height := TSize.Bottom - TSize.Top;
+
+  if (RPM4Byte(cshell.addr + ScreenAddr) = 0) then
+  begin
+    CenterX := Width div 2;
+    CenterY := Height div 2;
+  end else begin
+    CenterX := Width div 2 - 8;
+    CenterY := Height div 2 - 18;
+  end;
+
+    if (RPM1Byte(cshell.Addr + InGame) = 1) and (RPM1Byte(cshell.Addr + DeathCheck) = 1) then
+  Begin
+
+  Ca9n102v1as := TCanvas.Create;
+  Ca9n102v1as.Handle := M0hd0c;
+  Ca9n102v1as.Brush.Style := bsClear;
+  Ca9n102v1as.Pen.Style := psSolid;
+  Ca9n102v1as.Pen.Color := clWhite;
+  Ca9n102v1as.Pen.Width := 1;
+
+  Ca9n102v1as.Ellipse(CenterX - mainForm.FovV8alu15lBar.Position,
+    CenterY - mainForm.FovV8alu15lBar.Position,
+    CenterX + mainForm.FovV8alu15lBar.Position,
+    CenterY + mainForm.FovV8alu15lBar.Position);
+End;
+end;
+
+function D3D(_V, _A, _G: Single): TD3DXVector3;
+begin
+  with Result do
+  begin
+    X := _V;
+    Y := _A;
+    Z := _G;
+  end;
+end;
+
+function Getsex(K, U: TPosition): Single;
+begin
+  Result := Sqrt(Sqr(K.X - U.X) + Sqr(K.Z - U.Z) + Sqr(K.Y - U.Y));
+end;
+
+
+
+end.

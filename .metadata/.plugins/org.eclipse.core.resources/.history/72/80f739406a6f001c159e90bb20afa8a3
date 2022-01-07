@@ -1,0 +1,51 @@
+unit AddreUnit;
+
+interface
+
+uses
+  Winapi.Windows, System.SysUtils;
+
+type
+  Tcshell = record
+    Addr: DWORD;
+  end;
+
+var
+  PID: DWORD;
+  cshell: Tcshell;
+  hProcess: THandle;
+  SA_Handle: THandle;
+  Stealth_Handle: THandle;
+  TargetPosition: String;
+  DeathGame, WeaponSlot, Bullet: DWORD;
+  SuddenAttack_Handle: THandle;
+  WindShotChk: Integer;
+  WindAddr, WindValue: DWORD;
+  MSpaintHandle: THandle;
+   ModuleCopyAdr: DWORD;
+    C0py4d41, C0py4d42, C0py4d43, C0py4d44, C0py4d45 : DWORd;
+    Slot1 , Slot2, Slot3, Slot4 : DWORD;
+    WPM, WPM1, WPM2, WPM3 : DWORd;
+
+English: DWORD;
+AimHook: DWORD;
+AimYStack: DWORD;
+Team: DWORD;
+AimCheck: DWORD;
+MyPos: DWORD;
+Ingame: DWORD;
+PlayerAd: DWORD;
+DeathCheck: DWORD;
+RecoilAddr: DWORD;
+AimFixAddr: DWORD;
+ScreenAddr: DWORD;   //윈도우모드
+GetNodeFunc: DWORD;
+GetNodeTransformFunc: DWORD;
+WallDistinction: DWORD;
+ViewPort: DWORD;
+  PPAddr1: DWORD = $2B0;
+  PPAddr2: DWORD = $2B4;
+
+implementation
+
+end.

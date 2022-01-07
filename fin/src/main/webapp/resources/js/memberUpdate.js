@@ -165,6 +165,26 @@ function memberUpdateValidate(){
 
         }
     }
+
+    // input type="hidden" 태그 생성 및 추가
+    const phone = document.getElementsByName("phone");
+    const address = document.getElementsByName("address");
+
+    
+    const input1 = document.createElement("input");
+    input1.setAttribute("type", "hidden");
+    input1.setAttribute("name", "updatePhone");
+    input1.value = phone[0].value + "-" + phone[1].value + "-" + phone[2].value;
+    document.updateForm.append(input1);
+    
+    if(address[0].value.trim().length != 0){
+
+        const input2 = document.createElement("input");
+        input2.setAttribute("type", "hidden");
+        input2.setAttribute("name", "updateAddress");
+        input2.value = address[0].value + ",," + address[1].value + ",," + address[2].value;
+        document.updateForm.append(input2);
+    }
 }
 
 

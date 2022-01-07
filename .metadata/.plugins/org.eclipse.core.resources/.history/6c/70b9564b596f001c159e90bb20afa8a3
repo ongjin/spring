@@ -1,0 +1,8 @@
+package edu.kh.fin.board.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller // 슉.슈슉.슉 컨트롤러임을 알려줌 + Bean 등록
+public class BoardController {
+
+}

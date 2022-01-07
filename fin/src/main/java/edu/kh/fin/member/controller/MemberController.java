@@ -1,6 +1,8 @@
 package edu.kh.fin.member.controller;
 
 import java.net.http.HttpRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.fin.common.Util;
 import edu.kh.fin.member.model.service.MemberService;
 import edu.kh.fin.member.model.vo.Member;
 
@@ -315,10 +319,134 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	@RequestMapping(value="update", method= RequestMethod.GET)
-	public String update(Member member) {
-		int result = service.update()
-		return "member/update";
+	// 회원 정보 수정
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String update(@ModelAttribute("loginMember") Member loginMember,
+			@RequestParam Map<String, String> param, // 모든 파라미터를 Map형식으로 저장
+			Member member, // 비어있는 Member 객체 생성
+			RedirectAttributes ra
+			) {
+		
+		// 회원 정보 수정 시 필요한 값
+		// 1. 입력된 파라미터(이메일, 전화번호, 주소)
+		// 2. 로그인한 회원의 회원 번호(Session에서 얻어옴)
+		
+		// @ModelAttribute 이용 방식
+		// 1. 피라미터를 객체에 set하는 역할 -> 커맨드 객체 생성
+		// 2. @SessionAttributes를 이용해 등록된 Session 데이터를 얻어오는 역할
+		// 	-> @ModelAttribute("Session키값")
+		
+		// member에 회원번호, 수정된 피라미터를 모두 담기
+		member.setMemberNo(loginMember.getMemberNo());
+		member.setMemberEmail(param.get("updateEmail"));
+		member.setMemberPhone(param.get("updatePhone"));
+		member.setMemberAddress(param.get("updateAddress"));
+		
+		// 회원 정보 수정 Service 호출 후 결과 반환 받기
+		int result = service.updateMember(member);
+		
+		String title = null;
+		String text = null;
+		String icon = null;
+		String button = null;
+		
+		if(result > 0) {
+			
+			// Session 로그인 회원 정보를 DB와 동기화
+			// -> Session에 저장된 회원 정보 객체(Member)를 참조하는 loginMember 활용
+			loginMember.setMemberEmail(param.get("updateEmail"));
+			loginMember.setMemberPhone(param.get("updatePhone"));
+			loginMember.setMemberAddress(param.get("updateAddress"));
+			
+			
+			title = "회원 정보 수정 성공";
+			text = loginMember.getMemberName() + "님의 회원 정보가 수정되었습니다.";
+			icon = "success";
+			button = "확인";
+		}else {
+			title = "회원 정보 수정 실패";
+			text = "관리자에게 문의해주세요.";
+			icon = "error";
+			button = "실패";
+		}
+		ra.addFlashAttribute("title", title);
+		ra.addFlashAttribute("text", text);
+		ra.addFlashAttribute("icon", icon);
+		ra.addFlashAttribute("button", button);
+		
+		return "redirect:myPage/";
+	}
+	
+	
+	// 비밀번호 수정 화면 전환
+	@RequestMapping(value = "updatePw", method = RequestMethod.GET)
+	public String updatePw() {
+		return "member/updatePw";
+	}
+	
+	// 비밀번호 수정
+	@RequestMapping(value = "updatePw", method = RequestMethod.POST)
+	public String updatePw(@ModelAttribute("loginMember") Member loginMember,
+			String currentPw, String newPw1, RedirectAttributes ra) {
+		
+		// 비밀번호 수정 흐름
+		// (Controller)
+		// 1. 회원번호 + 현재 비밀번호 + 새 비밀번호 서비스 호출
+		
+		
+		// (Service)
+		// 2. 회원 번호를 이용해서 DB에 저장된 비밀번호를 조회
+		// 3. DB 저장된 비밀번호와 입력된 현재 비밀번호 비교(matches() 사용)
+		
+		// 4. 일치하면 새 비밀번호를 암호화 -> 비밀번호 변경 DAO 호출
+		// 5. 일치하지 않으면 Controller로 0 반환
+		
+		// (Controller)
+		// 6. 성공 여부에 따라 출력 메세지 지정 -> 리다이렉트
+		
+		// 회원번호 + 파라미터 저장용 Map 생성
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("memberNo", loginMember.getMemberNo() + "");
+		map.put("currentPw", currentPw);
+		map.put("newPw", newPw1);
+		
+		int result = service.updatePw(map);
+		
+		if(result > 0) {
+			Util.swalSetMessage("비밀번호 변경 성공", loginMember.getMemberName() + "님의 비밀번호가 수정되었습니다.", "success", "확인", ra);
+		}else {
+			Util.swalSetMessage("비밀번호 변경 실패", "비밀번호가 일치하지 않습니다.", "error", "확인", ra);
+		}
+		
+		return "redirect:myPage";
+	}
+	
+	@RequestMapping(value = "secession", method = RequestMethod.GET)
+	public String secession() {
+		return "member/secession";
+	}
+	
+	@RequestMapping(value = "secession", method = RequestMethod.POST)
+	public String secession(@ModelAttribute("loginMember") Member loginMember, String currentPw,
+			RedirectAttributes ra, SessionStatus status) {
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("currentPw", currentPw);
+		map.put("memberNo", loginMember.getMemberNo() + "");
+		
+		int result = service.secession(map);
+		
+		String temp = "redirect:/";
+		
+		if(result > 0) {
+			Util.swalSetMessage("회원탈퇴 성공", "", "success", "확인", ra);
+			status.setComplete();
+		}else {
+			Util.swalSetMessage("회원탈퇴 실패", "비밀번호가 일치하지 않습니다.", "error", "확인", ra);
+			temp = "redirect:secession";
+		}
+		
+		return temp;
 	}
 	
 	

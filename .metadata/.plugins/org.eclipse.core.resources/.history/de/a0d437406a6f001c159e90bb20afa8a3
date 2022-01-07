@@ -1,0 +1,102 @@
+unit InjectUnit;
+
+interface
+
+Uses
+  WinApi.Windows, System.Classes, Main1F0mer;
+
+  Function UnityHacksBypass : String;
+  Procedure UnityHacksModuleHideModule(hModule: hModule);
+  Procedure Initialize;
+
+implementation
+
+type
+  _UNICODE_STRING = record
+    Length: USHORT;
+    MaximumLength: USHORT;
+    Buffer: PChar;
+  end;
+
+  PLDR_MODULE = ^_LDR_MODULE;
+
+  _LDR_MODULE = record
+    InLoadOrderModuleList: LIST_ENTRY;
+    InMemoryOrderModuleList: LIST_ENTRY;
+    InInitializationOrderModuleList: LIST_ENTRY;
+    BaseAddress: Pointer;
+    EntryPoint: Pointer;
+    SizeOfImage: ULONG;
+    LibraryFullName: _UNICODE_STRING;
+    LibraryBaseName: _UNICODE_STRING;
+    Flags: ULONG;
+    LoadCount: SHORT;
+    TlsIndex: SHORT;
+    HashTableEntry: LIST_ENTRY;
+    TimeDateStamp: ULONG;
+  end;
+
+  PPEB_LDR_DATA = ^_PEB_LDR_DATA;
+
+  _PEB_LDR_DATA = record
+    Length: ULONG;
+    Initialized: UCHAR;
+    SsHandle: Pointer;
+    InLoadOrderModuleList: LIST_ENTRY;
+    InMemoryOrderModuleList: LIST_ENTRY;
+    InInitializationOrderModuleList: LIST_ENTRY;
+  end;
+
+procedure UnityHacksModuleUnlink(var LISTENTRY: LIST_ENTRY);
+begin
+  LISTENTRY.Blink.Flink := LISTENTRY.Flink;
+  LISTENTRY.Flink.Blink := LISTENTRY.Blink;
+end;
+
+procedure UnityHacksModuleHideModule(hModule: hModule);
+var
+  pLdr: PPEB_LDR_DATA;
+  pLdrModule: PLDR_MODULE;
+begin
+  asm
+    mov eax, fs:[30h]
+    mov eax, [eax+0Ch]
+    mov pLdr, eax
+  end;
+  pLdrModule := PLDR_MODULE(pLdr.InLoadOrderModuleList.Flink);
+  while (pLdrModule.BaseAddress <> nil) and
+    (pLdrModule.BaseAddress <> Pointer(hModule)) do
+    pLdrModule := PLDR_MODULE(pLdrModule.InLoadOrderModuleList.Flink);
+  if pLdrModule.BaseAddress = nil then
+    Exit;
+  UnityHacksModuleUnlink(pLdrModule.InLoadOrderModuleList);
+  UnityHacksModuleUnlink(pLdrModule.InInitializationOrderModuleList);
+  UnityHacksModuleUnlink(pLdrModule.InMemoryOrderModuleList);
+  UnityHacksModuleUnlink(pLdrModule.HashTableEntry);
+end;
+
+Function UnityHacksBypass : String;
+Var
+  UnityProtect,Value : DWORD;
+Begin
+  Try
+   VirtualProtect(Ptr(HINSTANCE), 1, PAGE_EXECUTE_READWRITE, UnityProtect);
+   ZeroMemory(Ptr(HINSTANCE + $130), $40);
+
+    Result := '[You have successfully completed the course.]';
+  Except
+    Result := '[An unknown error occurred.]';
+  End;
+End;
+
+Procedure Initialize;
+Begin
+  if (UnityHacksBypass = '[You have successfully completed the course.]') then
+  begin
+    Sleep(25000);
+    UnityHacksModuleHideModule(HINSTANCE);
+    MainForm := TMainForm.Create(nil);
+    MainForm.ShowModal;
+  end;
+End;
+end.

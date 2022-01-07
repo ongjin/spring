@@ -1,0 +1,51 @@
+unit AddreUnit;
+
+interface
+
+uses
+  Winapi.Windows, System.SysUtils;
+
+type
+  Tcshell = record
+    Addr: DWORD;
+  end;
+
+var
+  PID: DWORD;
+  cshell: Tcshell;
+  hProcess: THandle;
+  SA_Handle: THandle;
+  Stealth_Handle: THandle;
+  TargetPosition: String;
+  DeathGame, WeaponSlot, Bullet: DWORD;
+  SuddenAttack_Handle: THandle;
+  WindShotChk: Integer;
+  WindAddr, WindValue: DWORD;
+  MSpaintHandle: THandle;
+   ModuleCopyAdr: DWORD;
+    C0py4d41, C0py4d42, C0py4d43, C0py4d44, C0py4d45 : DWORd;
+    Slot1 , Slot2, Slot3, Slot4 : DWORD;
+    WPM, WPM1, WPM2, WPM3 : DWORd;
+
+English: DWORD = $0; //À×±Û
+AimHook: DWORD = $0; //¿¡ÀÓÈÅ
+AimYStack: DWORD = $0; //¿¡ÀÓY
+Team: DWORD = $0;       //ÆÀ
+AimCheck: DWORD = $0;  //¿¡ÀÓÃ¼Å©
+MyPos: DWORD = $0;     //¸¶Æ÷
+Ingame: DWORD = $0;    //ÀÎ°×
+PlayerAd: DWORD = $0;  //ÇÃÆ÷
+DeathCheck: DWORD = $0; //µ¥½ºÃ¼Å©
+RecoilAddr: DWORD = $0; //¹«¹Ý
+AimFixAddr: DWORD = $0; //¿¡°í
+ScreenAddr: DWORD = $0; //¿øµµ¿ì
+GetNodeFunc: DWORD = $0; //»À
+GetNodeTransformFunc: DWORD = $0; //»À
+WallDistinction: DWORD = $0; //»À
+ViewPort: DWORD = $0; //»À
+  PPAddr1: DWORD = $2B0;
+  PPAddr2: DWORD = $2B4;
+
+implementation
+
+end.

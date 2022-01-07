@@ -48,20 +48,21 @@ function validate(){ // 회원 가입 버튼 클릭 시 유효성 검사여부 �
     const phone = document.getElementsByName("phone");
     const address = document.getElementsByName("address");
 
+    
     const input1 = document.createElement("input");
-    const input2 = document.createElement("input");
-
     input1.setAttribute("type", "hidden");
-    input2.setAttribute("type", "hidden");
     input1.setAttribute("name", "memberPhone");
-    input2.setAttribute("name", "memberAddress");
-
     input1.value = phone[0].value + "-" + phone[1].value + "-" + phone[2].value;
-    input2.value = address[0].value + ",," + address[1].value + ",," + address[2].value;
+    document.signUpForm.append(input1);
+    
+    if(address[0].value.trim().length != 0){
 
-    document.signUpForm.append(input1, input2);
-
-    // return false;
+        const input2 = document.createElement("input");
+        input2.setAttribute("type", "hidden");
+        input2.setAttribute("name", "memberAddress");
+        input2.value = address[0].value + ",," + address[1].value + ",," + address[2].value;
+        document.signUpForm.append(input2);
+    }
     
     
 }

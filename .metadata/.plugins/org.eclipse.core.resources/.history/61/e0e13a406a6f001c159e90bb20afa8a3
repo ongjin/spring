@@ -1,0 +1,509 @@
+unit Me2m4o1ryUnit;
+
+interface
+
+uses
+  Winapi.Windows, System.Classes, System.SysUtils, Tlhelp32, AddreUnit;
+
+Procedure VPE(Addr: DWORD);
+
+Procedure UNVPE(Addr: DWORD);
+
+Function VAE(Size: DWORD): DWORD;
+
+Function RPM1Byte(lpBaseAddress: DWORD): Byte;
+Function RPM4Byte(lpBaseAddress: DWORD): DWORD;
+Function RPM8Byte(ECX: DWORD): Int64;
+Function RPMFloat(lpBaseAddress: DWORD): Single;
+
+Procedure WPM1Byte(lpBaseAddress, lpBuffer: DWORD);
+Procedure WPM2Byte(lpBaseAddress, lpBuffer: DWORD);
+Procedure WPM4Byte(lpBaseAddress, lpBuffer: DWORD);
+Procedure WPMFloat(lpBaseAddress: DWORD; lpBuffer: Single);
+
+Procedure WPMArray(Addr: DWORD; Value: String);
+Procedure WPMString(Address: DWORD; InputStr: String);
+
+Function SetRange(Data: Single): Single;
+
+Procedure CallHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+Procedure JmpHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+procedure JngHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+
+Procedure StealthThread(lpBaseAddress: DWORD);
+
+Function CheckProcess(Process: String): Boolean;
+
+Function KillProcess(ExeFileName: string): Integer;
+
+Function FindDestinationOfHook(HookCode: DWORD): DWORD;
+
+Function PlayerPointerDecrypt(ECX: DWORD): DWORD;
+Function GetBone2(h0bj: DWORD; B0neN4m2: String; Tr4nsf0rm: Pointer): Boolean;
+Function GetNode(h0bj: DWORD; N0d2: Pointer; B0neN4m2: String): Boolean;
+Function GetNodeTransform(h0bj: DWORD; N0d2: Integer;
+  Tr4nsf0rm: Pointer): Boolean;
+
+var
+  NoSwaping: TBitmap;
+  BoneName: DWORD;
+  NodeVa: Integer;
+
+implementation
+
+uses
+  Main1F0mer;
+
+Procedure VPE(Addr: DWORD);
+var
+  Protect: DWORD;
+begin
+  VirtualProtectEX(hProcess, Pointer(Addr), 1, PAGE_EXECUTE_READWRITE, Protect);
+end;
+
+Procedure UNVPE(Addr: DWORD);
+var
+  Protect: DWORD;
+begin
+  VirtualProtectEX(hProcess, Pointer(Addr), 1, PAGE_EXECUTE_READ, Protect);
+end;
+
+Function VAE(Size: DWORD): DWORD;
+begin
+  try
+    Result := DWORD(VirtualAllocEx(hProcess, nil, Size, MEM_COMMIT,
+      PAGE_EXECUTE_READWRITE));
+  except
+    Result := 0;
+  end;
+end;
+
+Function RPM1Byte(lpBaseAddress: DWORD): Byte;
+begin
+  ReadProcessMemory(hProcess, Pointer(lpBaseAddress), @Result, 1,
+    PNativeUInt(nil)^);
+End;
+
+Function RPM4Byte(lpBaseAddress: DWORD): DWORD;
+begin
+  ReadProcessMemory(hProcess, Pointer(lpBaseAddress), @Result, 4,
+    PNativeUInt(nil)^);
+end;
+
+Function RPM8Byte(ECX: DWORD): Int64;
+begin
+  ReadProcessMemory(hProcess, Ptr(ECX), @Result, 8, PNativeUInt(nil)^);
+end;
+
+Function RPMFloat(lpBaseAddress: DWORD): Single;
+begin
+  ReadProcessMemory(hProcess, Pointer(lpBaseAddress), @Result, 4,
+    PNativeUInt(nil)^);
+end;
+
+Procedure WPM1Byte(lpBaseAddress, lpBuffer: DWORD);
+begin
+  WriteProcessMemory(hProcess, Pointer(lpBaseAddress), @lpBuffer, 1,
+    PNativeUInt(nil)^);
+end;
+
+Procedure WPM2Byte(lpBaseAddress, lpBuffer: DWORD);
+begin
+  WriteProcessMemory(hProcess, Pointer(lpBaseAddress), @lpBuffer, 2,
+    PNativeUInt(nil)^);
+end;
+
+Procedure WPM4Byte(lpBaseAddress, lpBuffer: DWORD);
+begin
+  WriteProcessMemory(hProcess, Pointer(lpBaseAddress), @lpBuffer, 4,
+    PNativeUInt(nil)^);
+end;
+
+Procedure WPMFloat(lpBaseAddress: DWORD; lpBuffer: Single);
+begin
+  WriteProcessMemory(hProcess, Pointer(lpBaseAddress), @lpBuffer, 4,
+    PNativeUInt(nil)^);
+end;
+
+Procedure WPMArray(Addr: DWORD; Value: String);
+Var
+  Arrays: Array of Byte;
+  Len, i, Step: Integer;
+  ByteTemp: TStringList;
+begin
+  Trim(Value);
+  Len := 1;
+  for i := 1 to Length(Value) - 2 do
+  begin
+    if Pos(' ', Copy(Value, i, 1)) <> 0 then
+    begin
+      Inc(Len, 1);
+    end;
+  end;
+  SetLength(Arrays, Len);
+  ByteTemp := TStringList.Create;
+  i := 1;
+  Step := 0;
+  while (i <= Len) do
+  begin
+    ByteTemp.Add(Copy(Value, i + Step, 2));
+    Inc(i);
+    Inc(Step, 2);
+  end;
+  for i := Len - 1 downto 0 do
+  begin
+    Arrays[i] := StrToInt('$' + ByteTemp.Strings[i]);
+  end;
+  WriteProcessMemory(hProcess, Ptr(Addr), Arrays, Len, PNativeUInt(nil)^);
+  ByteTemp.Clear;
+end;
+
+Procedure WPMString(Address: DWORD; InputStr: String);
+var
+  TmpArr: Array of Byte;
+  Index: Integer;
+begin
+  SetLength(TmpArr, Length(InputStr) + 1);
+  for Index := 1 to Length(InputStr) do
+    TmpArr[Index - 1] := Ord(InputStr[Index]);
+  WriteProcessMemory(hProcess, Pointer(Address), TmpArr, Length(TmpArr),
+    PNativeUInt(nil)^);
+end;
+
+Function SetRange(Data: Single): Single;
+begin
+  while (Data >= PI) do
+    Data := Data - PI * 2;
+  while (Data < -PI) do
+    Data := Data + PI * 2;
+  Result := Data;
+end;
+
+Procedure CallHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+var
+  i: Integer;
+  pBuffer: DWORD;
+  WriteBuf: Array [0 .. 4] of Byte;
+  bBuffer: Byte;
+  NOW: NativeUInt;
+  old: Cardinal;
+begin
+  WriteBuf[0] := $E8;
+  pBuffer := FuncAdr - DestAddress - 5;
+  for i := 0 to 4 do
+    WriteBuf[i + 1] := PBYTE(Pointer(DWORD(@pBuffer) + i))^;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 16,
+    PAGE_EXECUTE_READWRITE, old);
+  WriteProcessMemory(hProcess, Pointer(DestAddress), @WriteBuf, 5, NOW);
+  bBuffer := $90;
+  if NopCount <> 0 then
+  begin
+    for i := 0 to NopCount - 1 do
+    begin
+      WriteProcessMemory(hProcess, Pointer(DestAddress + 5 + i),
+        @bBuffer, 1, NOW);
+    end;
+  end;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 4, old, old);
+end;
+
+Procedure JmpHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+var
+  i: Integer;
+  pBuffer: DWORD;
+  WriteBuf: Array [0 .. 4] of Byte;
+  bBuffer: Byte;
+  NOW: NativeUInt;
+  old: Cardinal;
+begin
+  WriteBuf[0] := $E9;
+  pBuffer := FuncAdr - DestAddress - 5;
+  for i := 0 to 4 do
+    WriteBuf[i + 1] := PBYTE(Pointer(DWORD(@pBuffer) + i))^;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 16,
+    PAGE_EXECUTE_READWRITE, old);
+  WriteProcessMemory(hProcess, Pointer(DestAddress), @WriteBuf, 5, NOW);
+  bBuffer := $90;
+  if NopCount <> 0 then
+  begin
+    for i := 0 to NopCount - 1 do
+    begin
+      WriteProcessMemory(hProcess, Pointer(DestAddress + 5 + i),
+        @bBuffer, 1, NOW);
+    end;
+  end;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 4, old, old);
+end;
+
+procedure JngHook(DestAddress: DWORD; FuncAdr: DWORD; NopCount: Integer);
+var
+  i: Integer;
+  bBuffer: Byte;
+  dBuffer: DWORD;
+  NOW: DWORD;
+  old: Cardinal;
+begin
+  bBuffer := $8E;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 16,
+    PAGE_EXECUTE_READWRITE, old);
+  WriteProcessMemory(hProcess, Pointer(DestAddress), @bBuffer, 1,
+    PNativeUInt(nil)^);
+  dBuffer := FuncAdr - DestAddress - 5;
+  WriteProcessMemory(hProcess, Pointer(DestAddress + 1), @dBuffer, 4,
+    PNativeUInt(nil)^);
+  bBuffer := $90;
+  if NopCount <> 0 then
+  begin
+    for i := 0 to NopCount - 1 do
+    begin
+      WriteProcessMemory(hProcess, Pointer(DestAddress + 5 + i), @bBuffer, 1,
+        PNativeUInt(nil)^);
+    end;
+  end;
+  VirtualProtectEX(hProcess, Pointer(DestAddress), 4, old, old);
+end;
+
+Procedure StealthThread(lpBaseAddress: DWORD);
+Var
+  hThread: THandle;
+  ThreadCtx: Context;
+  ThreadAdresi, OldProtect: DWORD;
+begin
+  ThreadAdresi := $00000000;
+  VirtualProtectEX(hProcess, Ptr(ThreadAdresi), $FFFFF, PAGE_EXECUTE_READWRITE,
+    OldProtect);
+  try
+    hThread := CreateRemoteThread(hProcess, Nil, 0, Ptr(ThreadAdresi),
+      Nil, 4, PID);
+
+    ThreadCtx.ContextFlags := CONTEXT_INTEGER;
+    GetThreadContext(hThread, ThreadCtx);
+    ThreadCtx.Eax := lpBaseAddress;
+
+    ThreadCtx.ContextFlags := CONTEXT_INTEGER;
+    SetThreadContext(hThread, ThreadCtx);
+    ResumeThread(hThread);
+  except
+  end;
+end;
+
+Function CheckProcess(Process: String): Boolean;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  Result := False;
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := Sizeof(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile))
+      = UpperCase(Process)) or (UpperCase(FProcessEntry32.szExeFile)
+      = UpperCase(Process))) then
+    begin
+      PID := FProcessEntry32.th32ProcessID;
+      if PID <> 0 then
+      begin
+        hProcess := OpenProcess(PROCESS_ALL_ACCESS, False, PID);
+        Result := True;
+        break;
+      end;
+    end;
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+  Result := True;
+end;
+
+Function KillProcess(ExeFileName: string): Integer;
+const
+  PROCESS_TERMINATE = $0001;
+var
+  ContinueLoop: BOOL;
+  FSnapshotHandle: THandle;
+  FProcessEntry32: TProcessEntry32;
+begin
+  Result := 0;
+  FSnapshotHandle := CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+  FProcessEntry32.dwSize := Sizeof(FProcessEntry32);
+  ContinueLoop := Process32First(FSnapshotHandle, FProcessEntry32);
+
+  while Integer(ContinueLoop) <> 0 do
+  begin
+    if ((UpperCase(ExtractFileName(FProcessEntry32.szExeFile))
+      = UpperCase(ExeFileName)) or (UpperCase(FProcessEntry32.szExeFile)
+      = UpperCase(ExeFileName))) then
+      Result := Integer(TerminateProcess(OpenProcess(PROCESS_TERMINATE, BOOL(0),
+        FProcessEntry32.th32ProcessID), 0));
+    ContinueLoop := Process32Next(FSnapshotHandle, FProcessEntry32);
+  end;
+  CloseHandle(FSnapshotHandle);
+end;
+
+Function FindDestinationOfHook(HookCode: DWORD): DWORD;
+begin
+  Result := RPM4Byte(HookCode + $1) + HookCode + 5;
+end;
+
+Function StrToAnsiHex(const str: string): string;
+var
+  Index: Integer;
+  temp: ansistring;
+begin
+  Result := '';
+  temp := ansistring(str);
+
+  for Index := 1 to Length(temp) do
+    Result := Result + IntToHex(Ord(temp[Index]), 2);
+end;
+
+Function Split2byte(input: string): string;
+var
+  temp: string;
+  I: Integer;
+begin
+  temp := '';
+  for I := 0 to Length(input) div 2 - 1 do
+  begin
+    if I = 0 then
+      temp := Copy(input, 0, 2)
+    else
+    begin
+      temp := temp + ' ' + (Copy(input, I * 2 + 1, 2));
+    end;
+    Result := temp;
+  end;
+end;
+
+Procedure WA(Addr: DWORD; Value: String);
+var
+  Arrays: Array of Byte;
+  Len, I, Step: Integer;
+  ByteTemp: TStringList;
+begin
+  Trim(Value);
+  Len := 1;
+  for I := 1 to Length(Value) - 2 do
+  begin
+    if Pos(' ', Copy(Value, I, 1)) <> 0 then
+    begin
+      Inc(Len, 1);
+    end;
+  end;
+  SetLength(Arrays, Len);
+  ByteTemp := TStringList.Create;
+  I := 1;
+  Step := 0;
+  while (I <= Len) do
+  begin
+    ByteTemp.Add(Copy(Value, I + Step, 2));
+    Inc(I);
+    Inc(Step, 2);
+  end;
+  for I := Len - 1 downto 0 do
+  begin
+    Arrays[I] := StrToInt('$' + ByteTemp.Strings[I]);
+  end;
+  WriteProcessMemory(hProcess, Pointer(Addr), Arrays, Len, PNativeUInt(nil)^);
+  ByteTemp.Clear;
+  ByteTemp.Free;
+end;
+
+Procedure WS(Address: DWORD; str: String);
+begin
+  WA(Address, Split2byte(StrToAnsiHex(str)) + ' 00 00 00 00 00 00 00 00 00 00');
+end;
+
+Function GetNode(h0bj: DWORD; N0d2: Pointer; B0neN4m2: String): Boolean;
+var
+  _GetNode: Pointer;
+begin
+  try
+    _GetNode := Pointer(GetNodeFunc);
+
+    if BoneName = 0 then
+      BoneName := DWORD(VirtualAllocEx(hProcess, Nil, 128, MEM_COMMIT,
+        PAGE_EXECUTE_READWRITE));
+
+    WS(BoneName, B0neN4m2);
+    asm
+      push N0d2
+      push BoneName
+      push h0bj
+      call _GetNode
+    end;
+  except
+  end;
+end;
+
+Function GetNodeTransform(h0bj: DWORD; N0d2: Integer;
+  Tr4nsf0rm: Pointer): Boolean;
+var
+  _GetNodeTransform: Pointer;
+begin
+  try
+    _GetNodeTransform := Pointer(GetNodeTransformFunc);
+    asm
+      push $1
+      push Tr4nsf0rm
+      push N0d2
+      push h0bj
+      call _GetNodeTransform
+    end;
+  except
+  end;
+end;
+
+Function GetBone2(h0bj: DWORD; B0neN4m2: String; Tr4nsf0rm: Pointer): Boolean;
+begin
+  try
+    GetNode(h0bj, @NodeVa, B0neN4m2);
+    GetNodeTransform(h0bj, NodeVa, Tr4nsf0rm);
+  except
+  end;
+end;
+
+Function PlayerPointerDecrypt(ECX: DWORD): DWORD;
+var
+  Eax: DWORD;
+begin
+  Result := 0;
+  Eax := RPM4Byte(ECX);
+  Eax := RPM4Byte(Eax + $8);
+  if RPM1Byte(Eax) = $83 then
+    Eax := Eax + $9;
+  if RPM8Byte(Eax) = $222222223520418B then
+    Result := RPM4Byte(ECX + $20) xor $22222222;
+  if RPM8Byte(Eax) = $555555553504418B then
+    Result := RPM4Byte(ECX + $4) xor $55555555;
+  if IntToHex(RPM8Byte(Eax), 16) = '888888883520418B' then
+    Result := RPM4Byte(ECX + $20) xor $88888888;
+  if RPM8Byte(Eax) = $0481448B1C41B70F then
+    Result := RPM4Byte(ECX + (RPM4Byte(ECX + $1C) and $FFFF) * $4 + $4)
+      xor $34563456;
+  if RPM8Byte(Eax) = $0C81448B0841B70F then
+    Result := RPM4Byte(ECX + (RPM4Byte(ECX + $8) and $FFFF) * $4 + $C)
+      xor $65436543;
+  if RPM8Byte(Eax) = $002508413320418B then
+    Result := ((RPM4Byte(ECX + $20) xor RPM4Byte(ECX + $8)) and $FFFF00)
+      xor RPM4Byte(ECX + $8);
+  if RPM8Byte(Eax) = $002504413308418B then
+    Result := ((RPM4Byte(ECX + $8) xor RPM4Byte(ECX + $4)) and $FFFF00)
+      xor RPM4Byte(ECX + $4);
+  if RPM8Byte(Eax) = $662510413320418B then
+    Result := ((RPM4Byte(ECX + $20) xor RPM4Byte(ECX + $10)) and $66666666)
+      xor RPM4Byte(ECX + $20);
+  if RPM8Byte(Eax) = $662504413314418B then
+    Result := ((RPM4Byte(ECX + $14) xor RPM4Byte(ECX + $4)) and $66666666)
+      xor RPM4Byte(ECX + $14);
+  if RPM8Byte(Eax) = $41331841331C418B then
+    Result := (RPM4Byte(ECX + $1C) xor RPM4Byte(ECX + $18))
+      xor RPM4Byte(ECX + $4);
+  if RPM8Byte(Eax) = $41331C413320418B then
+    Result := (RPM4Byte(ECX + $20) xor RPM4Byte(ECX + $1C))
+      xor RPM4Byte(ECX + $4);
+end;
+
+end.

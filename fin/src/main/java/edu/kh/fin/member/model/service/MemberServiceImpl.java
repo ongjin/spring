@@ -1,5 +1,7 @@
 package edu.kh.fin.member.model.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -91,6 +93,44 @@ public class MemberServiceImpl implements MemberService {
 		 * @Transcational 어노테이션은 RuntimeException이 발생했을 때 Rollback을 수행함
 		*/
 	}
+
+	// 회원 정보 수정
+	// @Transactional // 트랜잭션 처리는 여러 DML 수행 시 사용한다.
+	@Override
+	public int updateMember(Member member) {
+		return dao.updateMember(member);
+	}
+
+	// 비밀번호 수정
+	@Override
+	public int updatePw(Map<String, String> map) {
+		
+		String pw = dao.selectSavePw(map.get("memberNo") );
+		
+		int result = 0;
+		if(encoder.matches(map.get("currentPw"), pw)) {
+			
+			map.put("newPw", encoder.encode(map.get("newPw")));
+			result = dao.updatePw(map);
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int secession(Map<String, String> map) {
+		
+		String pw = dao.selectSavePw( map.get("memberNo") );
+		
+		int result = 0;
+		
+		if(encoder.matches(map.get("currentPw"), pw)) {
+			result = dao.secession( map.get("memberNo") );
+		}
+		
+		return result;
+	}
+	
 	
 	
 	

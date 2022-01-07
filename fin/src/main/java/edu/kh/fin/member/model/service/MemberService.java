@@ -1,5 +1,7 @@
 package edu.kh.fin.member.model.service;
 
+import java.util.Map;
+
 import edu.kh.fin.member.model.vo.Member;
 
 // 인터페이스란? 모든 메소드가 추상인 클래스
@@ -44,9 +46,27 @@ public interface MemberService {
 
 	/** 회원가입
 	 * @param member
-	 * @return member
+	 * @return result
 	 */
 	public abstract int signUp(Member member);
+
+	/** 회원 정보 수정
+	 * @param member
+	 * @return result
+	 */
+	public abstract int updateMember(Member member);
+
+	/** 비밀번호 변경
+	 * @param map
+	 * @return result
+	 */
+	public abstract int updatePw(Map<String, String> map);
+
+	/** 회원 탈퇴
+	 * @param map
+	 * @return result
+	 */
+	public abstract int secession(Map<String, String> map);
 	
 	
 	

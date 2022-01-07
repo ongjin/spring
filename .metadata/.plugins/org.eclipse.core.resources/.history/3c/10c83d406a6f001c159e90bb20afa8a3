@@ -1,0 +1,42 @@
+library KK;
+
+{ Important note about DLL memory management: ShareMem must be the
+  first unit in your library's USES clause AND your project's (select
+  Project-View Source) USES clause if your DLL exports any procedures or
+  functions that pass strings as parameters or function results. This
+  applies to all strings passed to and from your DLL--even those that
+  are nested in records and classes. ShareMem is the interface unit to
+  the BORLNDMM.DLL shared memory manager, which must be deployed along
+  with your DLL. To avoid using BORLNDMM.DLL, pass string information
+  using PChar or ShortString parameters. }
+
+
+
+
+
+{$R *.dres}
+
+uses
+  Winapi.Windows,
+  System.SysUtils,
+  System.Classes,
+  Main1F0mer in 'MainUnit\Main1F0mer.pas' {MainForm},
+  Me2m4o1ryUnit in 'Unit\Me2m4o1ryUnit.pas',
+  InjectUnit in 'Unit\InjectUnit.pas',
+  AddreUnit in 'Unit\AddreUnit.pas',
+  Auto1Bot3Unit in 'FunctionUnit\Auto1Bot3Unit.pas',
+  Co1py4Unit in 'FunctionUnit\Co1py4Unit.pas',
+  s2e0x3U1n9i8t in 'FunctionUnit\s2e0x3U1n9i8t.pas',
+  Gui14d4edUnit in 'FunctionUnit\Gui14d4edUnit.pas',
+  AimFixHookunit in 'FunctionUnit\AimFixHookunit.pas',
+  Cipher in 'SecurityUnit\Cipher.pas',
+  GetHWID in 'SecurityUnit\GetHWID.pas',
+  MamOpenSSL in 'SecurityUnit\MamOpenSSL.pas',
+  Parsing in 'SecurityUnit\Parsing.pas',
+  RecoilUnit in 'FunctionUnit\RecoilUnit.pas';
+
+{$R *.res}
+
+begin
+  StealthThread(Thread_Start);
+end.

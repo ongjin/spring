@@ -1,0 +1,490 @@
+unit Main1F0mer;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Math,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
+  Vcl.StdCtrls, Vcl.Styles, Vcl.Themes, URLMon, ShellApi,
+  WinInet, Tlhelp32, Vcl.ImgList, d3dx9, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
+  XPMan, Vcl.Menus, Vcl.Buttons;
+
+
+type
+  TMainForm = class(TForm)
+    D1p5T: TTimer;
+    Gui18dTe1d: TTimer;
+    S5K1T: TTimer;
+    P1a2T8T: TTimer;
+    Au85t0o1T: TTimer;
+    Mi8s1sT: TTimer;
+    PageControl1: TPageControl;
+    P1: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label6: TLabel;
+    GroupBox5: TGroupBox;
+    LButtonC: TCheckBox;
+    TeamC: TCheckBox;
+    GroupBox6: TGroupBox;
+    CheckBox5: TCheckBox;
+    Label1: TLabel;
+    P2: TTabSheet;
+    GroupBox2: TGroupBox;
+    F1o2v8C: TCheckBox;
+    Gui8141de: TCheckBox;
+    GroupBox1: TGroupBox;
+    S2k18e0le: TCheckBox;
+    BlueColorDialog: TColorDialog;
+    RedColorDialog: TColorDialog;
+    TeamS: TCheckBox;
+    RadioButton1: TRadioButton;
+    RadioButton2: TRadioButton;
+    CheckBox1: TCheckBox;
+    Label9: TLabel;
+    Ti1me8r1: TTimer;
+    h1e6: TTimer;
+    TrackBar3: TTrackBar;
+    TrackBar2: TTrackBar;
+    TrackBar1: TTrackBar;
+    FovV8alu15lBar: TTrackBar;
+    TrackBar4: TTrackBar;
+    CheckBox4: TCheckBox;
+    Button1: TButton;
+    Button2: TButton;
+    CheckBox2: TCheckBox;
+    TabSheet1: TTabSheet;
+    Button4: TButton;
+    Label12: TLabel;
+    Label15: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label5: TLabel;
+    Label4: TLabel;
+    Label13: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label11: TLabel;
+    Label10: TLabel;
+    ComboBox1: TComboBox;
+    procedure Gui8141deClick(Sender: TObject);
+    procedure Gui18dTe1dTimer(Sender: TObject);
+    procedure D1p5TTimer(Sender: TObject);
+    procedure S5K1TTimer(Sender: TObject);
+    procedure P1a2T8TTimer(Sender: TObject);
+    procedure Au85t0o1TTimer(Sender: TObject);
+    procedure TrackBar3Change(Sender: TObject);
+    procedure Mi8s1sTTimer(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
+    procedure Label13Click(Sender: TObject);
+    procedure RadioButton1Click(Sender: TObject);
+    procedure RadioButton2Click(Sender: TObject);
+    procedure Ti1me8r1Timer(Sender: TObject);
+    procedure TrackBar4Change(Sender: TObject);
+    procedure FovV8alu15lBarChange(Sender: TObject);
+    procedure TrackBar1Change(Sender: TObject);
+    procedure TrackBar2Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure CheckBox5Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure Label4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+  Smooth: Integer;
+  rList: TList;
+  Bytes: NativeUInt;
+  ONH: THandle;
+  UserFlyAddress2, UserFlyAddress3, UserFlyAddress, UserFlyAddress4, xorEax,
+    FinalAd: DWORD;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  Me2m4o1ryUnit, AddreUnit, Auto1Bot3Unit,
+  s2e0x3U1n9i8t, Gui14d4edUnit, AimFixHookunit, Co1py4Unit, RecoilUnit;
+
+procedure TMainForm.Au85t0o1TTimer(Sender: TObject);
+begin
+
+  Aut882o1;
+
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  ShowMessage(IntToHex(Gui80de1dAl0loc[0]));
+  ShowMessage(IntToHex(Gui80de1dAl0loc[1]));
+end;
+
+procedure AddrScan;
+var
+  Arrays: TArrayScan;
+  AdrBase: TStringList;
+  Str: String;
+begin
+  Arrays.Start := cshell.addr + $D00000;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '53 75 64 64 65 6E 41 74 74 61 63 6B 00 00 00 00 00 00';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr - $14, 6);
+  English := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := 'F3 0F 10 00 F3 0F 58 45 08';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  AimHook := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := 'DD D8 A1 ?? ?? ?? ?? 83 B8 ?? ?? ?? ?? 40 0F 85';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  AimYStack := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '?? 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 00 00 C4 BA 05 00 B2 00 00 00 00 01 00 00';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  Team := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '?? FF 00 00 00 00 00 00 ?? ?? ?? ?? 00 00 00 00 ?? ?? ?? ?? 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 BF 00 ?? ?? ?? 00 00 00 00 FF FF FF FF 00 00';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  AimCheck := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := $00400000;
+  Arrays.Finish := $00900000;
+  Arrays.ScanArray := '41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 50 51 52 53 54 55 56 57 58 59 5A 5B 5C 5D 5E 5F 60 41 42 43 44 45 46 47 48 49 4A 4B 4C 4D 4E 4F 50 51 52 53 54 55 56 57 58 59 5A 7B';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) + $472EF, 6);
+  MyPos := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '01 00 00 00 FF FF FF FF ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 03 00 00 00 FF FF FF FF 00 00 00 00 00 00 00 00 00';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  Ingame := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '70 69 6E 67 00 2D 39 38 45 38 45 35 33 45 46 38 32 00 2F 2F 2F 2F 2F';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr + $1558, 6);
+  PlayerAd := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '?? 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 00 00 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? 00 00 00 00 FF FF FF FF 00 00 00 3C 00 00 00 3C ?? ?? ?? ?? ?? ?? ?? ?? 00 00 00 00 FF FF FF FF';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  DeathCheck := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '8B 16 8B CE 8B F8 89 45 E0 8B 92 ?? ?? ?? ?? FF D2 89 45 E8 F3 ?? ?? 47 44 8D 8E ?? ?? ?? ?? 8B 86 ?? ?? ?? ?? F3 ?? ?? 45 FC';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  RecoilAddr := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := 'F3 0F 10 85 ?? ?? ?? ?? 8D 8D ?? ?? ?? ?? F3 ?? ?? 85 00 ?? ?? ?? ?? 0F 10 85 40 ?? ?? ?? ??';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  AimFixAddr := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := cshell.addr;
+  Arrays.Finish := cshell.addr + $FFFFFF;
+  Arrays.ScanArray := '?? 00 00 00 00 00 00 00 ?? ?? 00 00 ?? ?? 00 00 20 00 00 00 ?? ?? ?? 3F 01';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]) - cshell.addr, 6);
+  ScreenAddr := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := $00400000;
+  Arrays.Finish := $00900000;
+  Arrays.ScanArray := '55 8b ec 8b 4d ?? 8b 45 ?? c7 01 ?? ?? ?? ?? 85';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[1]), 6);
+  GetNodeFunc := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := $00400000;
+  Arrays.Finish := $00900000;
+  Arrays.ScanArray := '55 8b ec 8b 4d ?? 85 c9 74 ?? 80 b9 ?? ?? ?? ?? ?? 75 ?? ff 75 ?? ff 75 ?? ff';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]), 6);
+  GetNodeTransformFunc := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := $00400000;
+  Arrays.Finish := $00900000;
+  Arrays.ScanArray := '55 8B EC 8B 45 ?? 50 8B 4D ?? 51 8B 55 ?? 52 A1 ?? ?? ?? ?? 8B 10 8B 0D ?? ?? ?? ?? 8B 42 ?? FF D0 5D';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[0]), 6);
+  WallDistinction := StrToInt('$' + Str);
+
+  Sleep(5);
+
+  Arrays.Start := $00400000;
+  Arrays.Finish := $00900000;
+  Arrays.ScanArray := '00 00 00 00 00 00 00 00 ?? ?? 00 00 ?? ?? 00 00 00 00 00 00 00 00 80 3F ?? ?? 00 00 00 00 00 00';
+  AdrBase := ArrayScans(Arrays);
+  Str := IntToHex(StrToInt('$' + AdrBase[2]), 6);
+  ViewPort := StrToInt('$' + Str);
+end;
+
+procedure TMainForm.Button4Click(Sender: TObject);
+begin
+CheckProcess('SuddenAttack.exe');
+cshell.Addr := GetModuleBase('cshell.dll');
+
+Sleep(10);
+AddrScan;
+Sleep(100);
+
+  if (RPM1Byte(cshell.Addr + InGame) = 1) then
+  begin
+    Sleep(100);
+    CshellCopySet;
+    XYHo8o1kS6et;
+    MainForm.D1p5T.Enabled := True;
+
+    B5o1S8e1t;
+    MainForm.P1a2T8T.Enabled := True;
+
+    AimFixSet;
+    RecoilHook;
+    Gui88e11;
+
+    Shellexecute(0, 'open', 'cmd.exe', '/C start notepad.exe', nil, SW_Hide);
+    Sleep(500);
+    MSHi18j5ac2ki6ng_Main;
+
+    P1.Enabled := True;
+    P2.Enabled := True;
+    Button4.Enabled := False;
+    Ti1me8r1.Enabled := True;
+end;
+end;
+
+procedure TMainForm.CheckBox2Click(Sender: TObject);
+begin
+  RecoilHack(CheckBox2.Checked);
+end;
+
+procedure TMainForm.CheckBox5Click(Sender: TObject);
+begin
+AimFix_Hack(Checkbox5.Checked);
+end;
+
+procedure TMainForm.ComboBox1Change(Sender: TObject);
+begin
+
+  if (MainForm.ComboBox1.ItemIndex = 1) then
+    TargetPosition := 'Bip01 Head';
+  if (MainForm.ComboBox1.ItemIndex = 2) then
+    TargetPosition := 'Bip01 Neck';
+  if (MainForm.ComboBox1.ItemIndex = 3) then
+    TargetPosition := 'Bip01 Spine1';
+
+end;
+
+procedure TMainForm.D1p5TTimer(Sender: TObject);
+begin
+  Slot1 := RPM4Byte(cshell.Addr + English + $76C);
+  Slot2 := RPM4Byte(Slot1 + $14);
+  Slot3 := RPM4Byte(Slot2 + $38);
+  Slot4 := RPM4Byte(Slot3 + $2488);
+  if (RPM1Byte(cshell.Addr + InGame) <> 0) and
+    (RPM1Byte(cshell.Addr + DeathCheck) = 1) and (Slot4 <> 4) and (Slot4 <> 5)
+  then
+  begin
+    WPM4Byte(RPM4Byte(C0py4d44 + $14), ModuleCopyAdr + C0py4d43);
+  end;
+end;
+
+procedure TMainForm.S5K1TTimer(Sender: TObject);
+begin
+
+  Hijackingsex;
+
+end;
+
+procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+KillProcess('notepad.exe');
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+TStyleManager.SetStyle(TStyleManager.LoadFromResource(HInstance,'Windows10Dark'));
+end;
+
+procedure TMainForm.FovV8alu15lBarChange(Sender: TObject);
+begin
+
+  Label12.Caption := IntToStr(FovV8alu15lBar.Position);
+
+end;
+
+procedure TMainForm.Gui8141deClick(Sender: TObject);
+begin
+
+  if Gui8141de.Checked = True then
+  Begin
+    MainForm.Gui18dTe1d.Enabled := True;
+    CheckBox4.Enabled := True;
+    F1o2v8C.Enabled := True;
+  End;
+  if Gui8141de.Checked = False then
+  Begin
+    MainForm.Gui18dTe1d.Enabled := False;
+    CheckBox4.Enabled := False;
+    F1o2v8C.Enabled := False;
+    CheckBox4.Checked := False;
+    F1o2v8C.Checked := False;
+  End;
+
+end;
+
+procedure TMainForm.Gui18dTe1dTimer(Sender: TObject);
+begin
+
+  Gu800id1;
+
+end;
+
+procedure TMainForm.Label13Click(Sender: TObject);
+begin
+
+  RedColorDialog.Execute;
+  Label13.Color := RedColorDialog.Color;
+
+end;
+
+procedure TMainForm.Label4Click(Sender: TObject);
+begin
+
+  BlueColorDialog.Execute;
+  Label4.Color := BlueColorDialog.Color;
+
+end;
+
+procedure TMainForm.Mi8s1sTTimer(Sender: TObject);
+begin
+
+  Mi8s0s0_T;
+
+end;
+
+procedure TMainForm.P1a2T8TTimer(Sender: TObject);
+begin
+  P2la4ye8rk1;
+end;
+
+procedure TMainForm.RadioButton1Click(Sender: TObject);
+begin
+
+  Au85t0o1T.Enabled := True;
+
+end;
+
+procedure TMainForm.RadioButton2Click(Sender: TObject);
+begin
+
+  Au85t0o1T.Enabled := False;
+
+end;
+
+procedure TMainForm.Ti1me8r1Timer(Sender: TObject);
+begin
+
+  if GetAsyncKeyState(VK_END) <> 0 then
+  begin
+    MainForm.Hide;
+  end;
+  if GetAsyncKeyState(VK_Home) <> 0 then
+  begin
+    MainForm.Show;
+  end;
+
+end;
+
+procedure TMainForm.TrackBar1Change(Sender: TObject);
+begin
+
+  Label7.Caption := IntToStr(TrackBar1.Position);
+
+end;
+
+procedure TMainForm.TrackBar2Change(Sender: TObject);
+begin
+
+  Label8.Caption := IntToStr(TrackBar2.Position);
+
+end;
+
+procedure TMainForm.TrackBar3Change(Sender: TObject);
+begin
+
+  Label11.Caption := IntToStr(TrackBar3.Position);
+  RecoilValueSet(Single((MainForm.TrackBar3.Position) / 100));
+
+end;
+
+procedure TMainForm.TrackBar4Change(Sender: TObject);
+begin
+
+  Label15.Caption := IntToStr(TrackBar4.Position);
+  if (MainForm.TrackBar4.Position <> 0) then
+    Mi8s1sT.Enabled := True;
+  if (MainForm.TrackBar4.Position = 0) then
+    Mi8s1sT.Enabled := False;
+  MissC := False;
+
+end;
+
+end.

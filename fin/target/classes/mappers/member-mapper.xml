@@ -15,7 +15,7 @@
 		<id> 태그		: PK 역할 컬럼 - 필드 매핑
 		<result> 태그	: id 제외 나머지
 	-->
-	<resultMap type="edu.kh.fin.member.model.vo.Member" id="member_rm">
+	<resultMap type="Member" id="member_rm">
 	
 		<id property="memberNo" 			column="MEMBER_NO"/>
 		
@@ -74,5 +74,47 @@
 			#{memberEmail}, #{memberAddress}, DEFAULT, DEFAULT, DEFAULT
 		)
 	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET
+		MEMBER_PHONE = #{memberPhone},
+		MEMBER_EMAIL = #{memberEmail},
+		MEMBER_ADDR = #{memberAddress}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	<select id="selectSavePw" resultType="string">
+		SELECT MEMBER_PW FROM MEMBER 
+		WHERE MEMBER_NO = #{memberNo} AND STATUS_CD != 2
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<!-- parameterType="map" 생략 가능 -->
+	<update id="updatePw" parameterType="map">
+		UPDATE MEMBER SET
+		MEMBER_PW = #{newPw}
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	<!-- 
+		SQL 구문에 파라미터 작성하는 방법
+		1. 파라미터가 단일 자료형 : #{변수명(아무거나)}
+		2. 파라미터가 VO : #{필드명} (단, vo에 getter가 작성되어 있어야 함.)
+		3. 파라미터가 Map : #{key값} -> 해당 위치에 value가 작성 됨.
+		4. 파라미터가 List/Set : 동적 SQL forEach 태그 사용
+	-->
+	
+	<update id="secession">
+		UPDATE MEMBER SET
+		STATUS_CD = 2
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

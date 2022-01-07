@@ -1,0 +1,152 @@
+unit InjectUnit;
+
+interface
+
+uses
+  Winapi.Windows, System.SysUtils, Vcl.Forms, Me2m4o1ryUnit, AddreUnit,
+  tlhelp32, Dialogs, IdHttp;
+
+Function Thread_Start: DWORD;
+
+type
+  _UNICODE_STRING = record
+    Length: USHORT;
+    MaximumLength: USHORT;
+    Buffer: PChar;
+  end;
+
+  PLDR_MODULE = ^_LDR_MODULE;
+
+  _LDR_MODULE = record
+    InLoadOrderModuleList: LIST_ENTRY;
+    InMemoryOrderModuleList: LIST_ENTRY;
+    InInitializationOrderModuleList: LIST_ENTRY;
+    BaseAddress: Pointer;
+    EntryPoint: Pointer;
+    SizeOfImage: ULONG;
+    LibraryFullName: _UNICODE_STRING;
+    LibraryBaseName: _UNICODE_STRING;
+    Flags: ULONG;
+    LoadCount: SHORT;
+    TlsIndex: SHORT;
+    HashTableEntry: LIST_ENTRY;
+    TimeDateStamp: ULONG;
+  end;
+
+  PPEB_LDR_DATA = ^_PEB_LDR_DATA;
+
+  _PEB_LDR_DATA = record
+    Length: ULONG;
+    Initialized: UCHAR;
+    SsHandle: Pointer;
+    InLoadOrderModuleList: LIST_ENTRY;
+    InMemoryOrderModuleList: LIST_ENTRY;
+    InInitializationOrderModuleList: LIST_ENTRY;
+  end;
+
+implementation
+
+uses
+  Main1F0mer;
+
+Procedure ModuleUnlink(var LISTENTRY: LIST_ENTRY);
+begin
+  LISTENTRY.Blink.Flink := LISTENTRY.Flink;
+  LISTENTRY.Flink.Blink := LISTENTRY.Blink;
+end;
+
+Procedure ModuleHide(hModule: hModule);
+var
+  pLdr: PPEB_LDR_DATA;
+  pLdrModule: PLDR_MODULE;
+begin
+  asm
+    mov eax, fs:[30h]
+    mov eax, [eax+0Ch]
+    mov pLdr, eax
+  end;
+  pLdrModule := PLDR_MODULE(pLdr.InLoadOrderModuleList.Flink);
+  while (pLdrModule.BaseAddress <> nil) and
+    (pLdrModule.BaseAddress <> Pointer(hModule)) do
+    pLdrModule := PLDR_MODULE(pLdrModule.InLoadOrderModuleList.Flink);
+  if pLdrModule.BaseAddress = nil then
+    Exit;
+  ModuleUnlink(pLdrModule.InLoadOrderModuleList);
+  ModuleUnlink(pLdrModule.InInitializationOrderModuleList);
+  ModuleUnlink(pLdrModule.InMemoryOrderModuleList);
+  ModuleUnlink(pLdrModule.HashTableEntry);
+end;
+
+Function ModuleRemove(Handle: hModule): Boolean;
+var
+  Header: PImageNtHeaders;
+  OldProtect, Size: Cardinal;
+begin
+  Result := False;
+  if ((Handle = 0) and (PImageDosHeader(Handle)._lfanew = 0)) then
+    Exit;
+  Header := Pointer(Integer(Handle) + PImageDosHeader(Handle)._lfanew);
+  if (Header.Signature = IMAGE_NT_SIGNATURE) then
+  begin
+    if (Header.FileHeader.SizeOfOptionalHeader <> 0) then
+    begin
+      Size := Header.OptionalHeader.SizeOfHeaders;
+      VirtualProtect(Pointer(Handle), Size, PAGE_EXECUTE_READWRITE, OldProtect);
+      ZeroMemory(Pointer(Handle), Size);
+      VirtualProtect(Pointer(Handle), Size, OldProtect, OldProtect);
+    end
+    else
+    begin
+      Size := SizeOf(TImageDosHeader) + SizeOf(TImageFileHeader) + 4;
+      VirtualProtect(Pointer(Handle), Size, PAGE_EXECUTE_READWRITE, OldProtect);
+      ZeroMemory(Pointer(Handle), Size);
+      VirtualProtect(Pointer(Handle), Size, OldProtect, OldProtect);
+    end;
+    Result := True;
+  end;
+end;
+
+Function DllBypass: Boolean;
+begin
+  try
+    VirtualProtect(Ptr(HINSTANCE), $1000, PAGE_EXECUTE_READWRITE, PID);
+    ZeroMemory(Ptr(HINSTANCE + $130), $40);
+  finally
+    Result := True;
+  end;
+end;
+
+Function MainFormShow: DWORD;
+begin
+  MainForm := TMainForm.Create(Nil);
+  MainForm.ShowModal;
+end;
+
+Function Inject: DWORD;
+begin
+  while (True) do
+  begin
+    DllBypass;
+    ModuleRemove(HINSTANCE);
+    ModuleHide(HINSTANCE);
+    CheckProcess('SuddenAttack.exe');
+    cshell.addr := GetModuleHandle('cshell.dll');
+    if (DllBypass = True) then
+    begin
+      StealthThread(MainFormShow);
+      TerminateThread(Stealth_Handle, 0);
+    end;
+  end;
+end;
+
+Procedure Stealth;
+begin
+  StealthThread(Inject);
+end;
+
+Function Thread_Start: DWORD;
+begin
+  Stealth_Handle := CreateThread(nil, 0, @Stealth, @Stealth, 0, PID);
+end;
+
+end.

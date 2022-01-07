@@ -1,0 +1,245 @@
+unit Main1F0mer;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Math,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls,
+  Vcl.StdCtrls, Vcl.Styles, Vcl.Themes, URLMon, ShellApi,
+  WinInet, Tlhelp32, Vcl.ImgList, d3dx9, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
+  XPMan, Vcl.Menus, Vcl.Buttons;
+
+
+type
+  TMainForm = class(TForm)
+    D1p5T: TTimer;
+    Gui18dTe1d: TTimer;
+    S5K1T: TTimer;
+    P1a2T8T: TTimer;
+    Au85t0o1T: TTimer;
+    Mi8s1sT: TTimer;
+    PageControl1: TPageControl;
+    P2: TTabSheet;
+    GroupBox2: TGroupBox;
+    F1o2v8C: TCheckBox;
+    Gui8141de: TCheckBox;
+    BlueColorDialog: TColorDialog;
+    RedColorDialog: TColorDialog;
+    Label9: TLabel;
+    Ti1me8r1: TTimer;
+    h1e6: TTimer;
+    FovV8alu15lBar: TTrackBar;
+    TrackBar4: TTrackBar;
+    CheckBox4: TCheckBox;
+    Button1: TButton;
+    Button2: TButton;
+    TabSheet1: TTabSheet;
+    Button4: TButton;
+    Label12: TLabel;
+    Label15: TLabel;
+    Label5: TLabel;
+    Label10: TLabel;
+    TeamC: TCheckBox;
+    procedure Gui8141deClick(Sender: TObject);
+    procedure Gui18dTe1dTimer(Sender: TObject);
+    procedure D1p5TTimer(Sender: TObject);
+    procedure P1a2T8TTimer(Sender: TObject);
+    procedure Mi8s1sTTimer(Sender: TObject);
+    procedure Label13Click(Sender: TObject);
+    procedure RadioButton1Click(Sender: TObject);
+    procedure RadioButton2Click(Sender: TObject);
+    procedure Ti1me8r1Timer(Sender: TObject);
+    procedure TrackBar4Change(Sender: TObject);
+    procedure FovV8alu15lBarChange(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+    procedure Label4Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  MainForm: TMainForm;
+  Smooth: Integer;
+  rList: TList;
+  Bytes: NativeUInt;
+  ONH: THandle;
+  UserFlyAddress2, UserFlyAddress3, UserFlyAddress, UserFlyAddress4, xorEax,
+    FinalAd: DWORD;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  Me2m4o1ryUnit, AddreUnit, Auto1Bot3Unit,
+  s2e0x3U1n9i8t, Gui14d4edUnit, AimFixHookunit, Co1py4Unit;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+begin
+  ShowMessage(IntToHex(Gui80de1dAl0loc[0]));
+  ShowMessage(IntToHex(Gui80de1dAl0loc[1]));
+end;
+
+
+
+procedure TMainForm.Button4Click(Sender: TObject);
+begin
+CheckProcess('SuddenAttack.exe');
+cshell.Addr := GetModuleBase('cshell.dll');
+
+Sleep(100);
+
+  if (RPM1Byte(cshell.Addr + InGame) = 1) then
+  begin
+    Sleep(100);
+    CshellCopySet;
+    MainForm.D1p5T.Enabled := True;
+
+    B5o1S8e1t;
+    MainForm.P1a2T8T.Enabled := True;
+
+    AimFixSet;
+    Gui88e11;
+
+
+
+    P2.Enabled := True;
+    Button4.Enabled := False;
+    Ti1me8r1.Enabled := True;
+end;
+end;
+
+
+
+procedure TMainForm.D1p5TTimer(Sender: TObject);
+begin
+  Slot1 := RPM4Byte(cshell.Addr + English + $76C);
+  Slot2 := RPM4Byte(Slot1 + $14);
+  Slot3 := RPM4Byte(Slot2 + $38);
+  Slot4 := RPM4Byte(Slot3 + $2488);
+  if (RPM1Byte(cshell.Addr + InGame) <> 0) and
+    (RPM1Byte(cshell.Addr + DeathCheck) = 1) and (Slot4 <> 4) and (Slot4 <> 5)
+  then
+  begin
+    WPM4Byte(RPM4Byte(C0py4d44 + $14), ModuleCopyAdr + C0py4d43);
+  end;
+end;
+
+procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
+begin
+KillProcess('notepad.exe');
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+TStyleManager.SetStyle(TStyleManager.LoadFromResource(HInstance,'Windows10Dark'));
+end;
+
+procedure TMainForm.FovV8alu15lBarChange(Sender: TObject);
+begin
+
+  Label12.Caption := IntToStr(FovV8alu15lBar.Position);
+
+end;
+
+procedure TMainForm.Gui8141deClick(Sender: TObject);
+begin
+
+  if Gui8141de.Checked = True then
+  Begin
+    MainForm.Gui18dTe1d.Enabled := True;
+    CheckBox4.Enabled := True;
+    F1o2v8C.Enabled := True;
+  End;
+  if Gui8141de.Checked = False then
+  Begin
+    MainForm.Gui18dTe1d.Enabled := False;
+    CheckBox4.Enabled := False;
+    F1o2v8C.Enabled := False;
+    CheckBox4.Checked := False;
+    F1o2v8C.Checked := False;
+  End;
+
+end;
+
+procedure TMainForm.Gui18dTe1dTimer(Sender: TObject);
+begin
+
+  Gu800id1;
+
+end;
+
+procedure TMainForm.Label13Click(Sender: TObject);
+begin
+
+  RedColorDialog.Execute;
+
+
+end;
+
+procedure TMainForm.Label4Click(Sender: TObject);
+begin
+
+  BlueColorDialog.Execute;
+
+end;
+
+procedure TMainForm.Mi8s1sTTimer(Sender: TObject);
+begin
+
+  Mi8s0s0_T;
+
+end;
+
+procedure TMainForm.P1a2T8TTimer(Sender: TObject);
+begin
+  P2la4ye8rk1;
+end;
+
+procedure TMainForm.RadioButton1Click(Sender: TObject);
+begin
+
+  Au85t0o1T.Enabled := True;
+
+end;
+
+procedure TMainForm.RadioButton2Click(Sender: TObject);
+begin
+
+  Au85t0o1T.Enabled := False;
+
+end;
+
+procedure TMainForm.Ti1me8r1Timer(Sender: TObject);
+begin
+
+  if GetAsyncKeyState(VK_END) <> 0 then
+  begin
+    MainForm.Hide;
+  end;
+  if GetAsyncKeyState(VK_Home) <> 0 then
+  begin
+    MainForm.Show;
+  end;
+
+end;
+
+procedure TMainForm.TrackBar4Change(Sender: TObject);
+begin
+
+  Label15.Caption := IntToStr(TrackBar4.Position);
+  if (MainForm.TrackBar4.Position <> 0) then
+    Mi8s1sT.Enabled := True;
+  if (MainForm.TrackBar4.Position = 0) then
+    Mi8s1sT.Enabled := False;
+  MissC := False;
+
+end;
+
+end.
