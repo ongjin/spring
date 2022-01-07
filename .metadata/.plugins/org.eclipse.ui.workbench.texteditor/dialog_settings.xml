@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="@ModelAttribute"/>
+		<item key="selection" value="Status"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="@ModelAttribute"/>
 			<item value="status"/>
+			<item value="ResponseStatus"/>
+			<item value="selectBoardImageList"/>
+			<item value="statusName"/>
+			<item value="statusCode"/>
+			<item value="@ModelAttribute"/>
 			<item value="selectMember"/>
 			<item value="updatePw"/>
 			<item value="SessionAttributes"/>
