@@ -1,0 +1,18 @@
+package edu.kh.fin.chat.model.service;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import edu.kh.fin.chat.model.dao.ChatDAO;
+
+@Service
+public class ChatServiceImpl implements ChatService{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private ChatDAO dao;
+	
+}

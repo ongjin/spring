@@ -1,0 +1,8 @@
+package edu.kh.fin.common.aop;
+
+// Pointcut을 모아둘 클래스
+public class Pointcut {
+	public void controllerPointcut() {
+		
+	}
+}

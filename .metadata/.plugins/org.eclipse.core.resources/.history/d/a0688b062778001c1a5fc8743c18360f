@@ -1,0 +1,12 @@
+package edu.kh.fin.common.aop;
+
+import org.aspectj.lang.annotation.Pointcut;
+
+// Pointcut을 모아둘 클래스
+public class Pointcut {
+	
+	@Pointcut
+	public void controllerPointcut() {
+		
+	}
+}

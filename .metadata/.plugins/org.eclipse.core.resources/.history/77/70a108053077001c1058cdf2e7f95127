@@ -1,0 +1,5 @@
+package edu.kh.fin.chat.model.vo;
+
+public class ChatMessage {
+
+}

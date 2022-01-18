@@ -138,3 +138,34 @@
     bottom: 0;
     right: 0;
 }
+
+
+.deleteImg {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: rgba(50, 50, 50, 0.2);
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 15px;
+	font-weight: bold;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.deleteImg:hover {
+	background-color: rgba(50, 50, 50, 0.3);
+}
+
+/* 게시글 목록에 카테고리 검색 추가 */
+#boardName{ position : relative;}
+#selectCategory{
+   font-size: 16px;
+    position: absolute;
+    top: 65px;
+    right: 30px;
+}
+

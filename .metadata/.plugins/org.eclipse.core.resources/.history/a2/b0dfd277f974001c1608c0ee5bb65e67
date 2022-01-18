@@ -1,0 +1,26 @@
+package edu.kh.fin.common.scheduling;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+@Component // Bean 등록
+public class ImageDeleteScheduling {
+	
+	/*
+	 * * cron 속성 : UNIX계열 잡 스케쥴러 표현식으로 작성 - cron="초 분 시 일 월 요일 [년도]" - 요일 : 1(SUN) ~ 7(SAT) 
+	 * ex) 2019년 9월 16일 월요일 10시 30분 20초 cron="20 30 10 16 9 2" // 연도 생략 가능
+	 * 
+	 * - 특수문자 * : 모든 수. 
+	 * - : 두 수 사이의 값. ex) 10-15 -> 10이상 15이하 
+	 * , : 특정 값 지정. ex) 3,4,7 -> 3,4,7 지정 
+	 * / : 값의 증가. ex) 0/5 -> 0부터 시작하여 5마다 
+	 * ? : 특별한 값이 없음. (월, 요일만 해당) 
+	 * L : 마지막. (월, 요일만 해당)
+	 */
+	
+	//         cron = "초 분 시 일 월 요일 [년도]"
+	@Scheduled(cron = "0 * * * * *") // 모든 년월일시분,요일 0초 == 매분 0초마다
+	public void imageDelete() {
+		
+	}
+}

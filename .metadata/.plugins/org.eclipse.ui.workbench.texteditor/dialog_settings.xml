@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Status"/>
+		<item key="selection" value="Logg"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
-			<item value="status"/>
-			<item value="ResponseStatus"/>
-			<item value="selectBoardImageList"/>
-			<item value="statusName"/>
-			<item value="statusCode"/>
-			<item value="@ModelAttribute"/>
-			<item value="selectMember"/>
-			<item value="updatePw"/>
-			<item value="SessionAttributes"/>
-			<item value="loginMem"/>
-			<item value="loginmem"/>
-			<item value="signUpCheckObj"/>
-			<item value="dbcp"/>
-			<item value="memberMapper"/>
+			<item value="logg"/>
+			<item value="GSON"/>
+			<item value="exceptionHandler"/>
+			<item value="jsp"/>
+			<item value="list"/>
+			<item value="resultMap"/>
+			<item value="loginMember"/>
+			<item value="getSearchListCount"/>
+			<item value="목록"/>
+			<item value="List&lt;"/>
+			<item value="List"/>
+			<item value="deleteImages"/>
+			<item value="수정"/>
+			<item value="jstl"/>
+			<item value="serverPath"/>
 		</list>
 		<list key="replacehistory">
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1159"/>
-		<item key="DIALOG_Y_ORIGIN" value="140"/>
+		<item key="DIALOG_X_ORIGIN" value="1161"/>
+		<item key="DIALOG_Y_ORIGIN" value="150"/>
 		<item key="DIALOG_WIDTH" value="322"/>
-		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_HEIGHT" value="390"/>
 		<item key="DIALOG_FONT_NAME" value="1|맑은 고딕|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.GotoLineAction$GotoLineDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="499"/>
+		<item key="DIALOG_Y_ORIGIN" value="269"/>
 	</section>
 </section>

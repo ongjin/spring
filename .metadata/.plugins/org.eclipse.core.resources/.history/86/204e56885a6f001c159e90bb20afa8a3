@@ -1,8 +1,0 @@
-package edu.kh.fin.board.model.service;
-
-// Service 인터페이스 왜 사용할까?
-// 1. 규칙성 
-
-public interface BoardService {
-
-}

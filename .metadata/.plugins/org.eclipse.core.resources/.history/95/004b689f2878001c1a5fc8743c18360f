@@ -1,0 +1,8 @@
+package edu.kh.fin.common.aop;
+
+import org.aspectj.lang.annotation.Aspect;
+
+@Aspect
+public class AroundAspect {
+
+}

@@ -7,8 +7,8 @@ public class Reply {
 	private int boardNo;
 	private int memberNo;
 	private String memberName;
-	private int replyStatusCode;
-	private String replyStatusName;
+	private int statusCode;
+	private int parentReplyNo;
 	
 	public Reply() {
 		// TODO Auto-generated constructor stub
@@ -62,28 +62,30 @@ public class Reply {
 		this.memberName = memberName;
 	}
 
-	public int getReplyStatusCode() {
-		return replyStatusCode;
+	public int getStatusCode() {
+		return statusCode;
 	}
 
-	public void setReplyStatusCode(int replyStatusCode) {
-		this.replyStatusCode = replyStatusCode;
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 	}
 
-	public String getReplyStatusName() {
-		return replyStatusName;
+	public int getParentReplyNo() {
+		return parentReplyNo;
 	}
 
-	public void setReplyStatusName(String replyStatusName) {
-		this.replyStatusName = replyStatusName;
+	public void setParentReplyNo(int parentReplyNo) {
+		this.parentReplyNo = parentReplyNo;
 	}
 
 	@Override
 	public String toString() {
 		return "Reply [replyNo=" + replyNo + ", replyContent=" + replyContent + ", replyCreateDate=" + replyCreateDate
-				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberName=" + memberName
-				+ ", replyStatusCode=" + replyStatusCode + ", replyStatusName=" + replyStatusName + "]";
+				+ ", boardNo=" + boardNo + ", memberNo=" + memberNo + ", memberName=" + memberName + ", statusCode="
+				+ statusCode + ", parentReplyNo=" + parentReplyNo + "]";
 	}
 	
+	
+
 	
 }

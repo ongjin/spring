@@ -1,0 +1,10 @@
+package edu.kh.fin.chat.model.vo;
+
+public class ChatRoomJoin {
+	private int memberNo;
+	private int chatRoomNo;
+	
+	public ChatRoomJoin() {
+		// TODO Auto-generated constructor stub
+	}
+}

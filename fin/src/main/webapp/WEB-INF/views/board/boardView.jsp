@@ -123,17 +123,26 @@
 				<div>
 					<c:if test="${loginMember.memberNo == board.memberNo }">
 						<%-- 로그인된 회원과 해당 글 작성자가 같은 경우에만 수정, 삭제 버튼 노출--%>
-						<button id="deleteBtn" class="btn btn-primary float-right mr-2">삭제</button> 
+						<button id="deleteBtn" class="btn btn-primary float-right mr-2" onclick="deleteBoard();">삭제</button> 
 						<button id="updateBtn" class="btn btn-primary float-right mr-2" onclick="updateForm();">수정</button> 
 					</c:if>
 					
+					<%-- 파라미터 중 sv가 있다면 변수 생성 --%>
+					<c:if test="${!empty param.sv}">
+						<c:set var="s" value="&sk=${param.sk}&sv=${param.sv}"/>
+					</c:if>
 					
-					<a href="../list?cp=${param.cp}" class="btn btn-primary float-right mr-2">목록으로</a>
+					<%-- 파라미터 중 ct가 있다면 변수 생성 --%> 
+					<c:if test="${!empty param.ct}">
+						<c:set var="c" value="&ct=${param.ct}"/>
+					</c:if>
+					
+					<a href="../list?cp=${param.cp}${c}${s}" class="btn btn-primary float-right mr-2">목록으로</a>
 				</div>
 				
 				
 				<%-- 댓글 영역 include 예정 --%>
-				<%-- <jsp:include page="reply.jsp"/> --%>
+				<jsp:include page="reply.jsp"/>
 			</div>
 
 		</div>
@@ -141,8 +150,8 @@
 	
 	
 	<form action="#" method="POST" name="requestForm">
-		<input type="hidden" name="cp" value="${param.cp }">
-		<input type="hidden" name="no" value="${param.no }">
+		<input type="hidden" name="cp"value="${param.cp }">
+		<input type="hidden" name="boardNo" value="${board.boardNo }">
 	</form>
 	
 	

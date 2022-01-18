@@ -1,0 +1,45 @@
+package edu.kh.fin.chat.model.vo;
+
+public class ChatRoom {
+	private int chatRoomNo;
+	private String title;
+	private int statusCode;
+	private int memberNo;
+	
+	public ChatRoom() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getChatRoomNo() {
+		return chatRoomNo;
+	}
+
+	public void setChatRoomNo(int chatRoomNo) {
+		this.chatRoomNo = chatRoomNo;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public int getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	
+}
