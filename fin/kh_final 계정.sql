@@ -414,15 +414,15 @@ INSERT INTO CHAT_ROOM VALUES(SEQ_CR_NO.NEXTVAL, '테스트1', DEFAULT, 1/*회원
 
 -- 채팅방 참여
 INSERT INTO CHAT_ROOM_JOIN VALUES(1/*회원번호*/, 1/*채팅방번호*/);
-INSERT INTO CHAT_ROOM_JOIN VALUES(22/*회원번호*/, 1/*채팅방번호*/);
+INSERT INTO CHAT_ROOM_JOIN VALUES(10/*회원번호*/, 1/*채팅방번호*/);
 
 -- 채팅방 생성
-INSERT INTO CHAT_ROOM VALUES(SEQ_CR_NO.NEXTVAL, '테스트2', DEFAULT, 22/*회원번호*/);
+INSERT INTO CHAT_ROOM VALUES(SEQ_CR_NO.NEXTVAL, '테스트2', DEFAULT, 10/*회원번호*/);
 
 -- 채팅방 참여
 INSERT INTO CHAT_ROOM_JOIN VALUES(1/*회원번호*/, 3/*채팅방번호*/);
-INSERT INTO CHAT_ROOM_JOIN VALUES(22/*회원번호*/, 3/*채팅방번호*/);
-INSERT INTO CHAT_ROOM_JOIN VALUES(23/*회원번호*/, 3/*채팅방번호*/);
+INSERT INTO CHAT_ROOM_JOIN VALUES(10/*회원번호*/, 3/*채팅방번호*/);
+INSERT INTO CHAT_ROOM_JOIN VALUES(10/*회원번호*/, 3/*채팅방번호*/);
 
 -- 채팅방 목록 조회(채팅방 번호, 제목, 개설자 이름, 몇명 참여중(COUNT))
 -- 조건 : 삭제되지 않은 방

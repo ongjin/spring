@@ -1,0 +1,12 @@
+
+1월 19, 2022 09:12:19.119 NEW SESSION
+1월 19, 2022 09:12:19.119 [9144:1756:0119/091219.116:ERROR:chrome_browser_main_extra_parts_metrics.cc(227)] START: ReportBluetoothAvailability(). If you don't see the END: message, this is crbug.com/1216328.
+1월 19, 2022 09:12:19.119 [9144:1756:0119/091219.116:ERROR:chrome_browser_main_extra_parts_metrics.cc(230)] END: ReportBluetoothAvailability()
+1월 19, 2022 09:12:19.120 [9144:1756:0119/091219.116:ERROR:chrome_browser_main_extra_parts_metrics.cc(235)] START: GetDefaultBrowser(). If you don't see the END: message, this is crbug.com/1216328.
+1월 19, 2022 09:12:19.121 [9144:1756:0119/091219.117:ERROR:chrome_browser_main_extra_parts_metrics.cc(239)] END: GetDefaultBrowser()
+1월 19, 2022 09:12:19.129 [9144:29528:0119/091219.128:ERROR:device_event_log_impl.cc(214)] [09:12:19.128] USB: usb_device_handle_win.cc:1050 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+1월 19, 2022 09:12:19.134 [9144:29528:0119/091219.133:ERROR:device_event_log_impl.cc(214)] [09:12:19.133] USB: usb_device_handle_win.cc:1050 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+1월 19, 2022 09:12:19.134 [9144:29528:0119/091219.133:ERROR:device_event_log_impl.cc(214)] [09:12:19.133] USB: usb_device_handle_win.cc:1050 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+1월 19, 2022 09:12:20.397 [9144:29528:0119/091220.397:ERROR:template_url_service.cc(1063)] Search Engines datatype error was encountered: ProcessSyncChanges failed on ChangeType ACTION_DELETE
+1월 19, 2022 09:12:20.398 [9144:29528:0119/091220.397:ERROR:template_url_service.cc(1063)] Search Engines datatype error was encountered: ProcessSyncChanges failed on ChangeType ACTION_DELETE
+1월 19, 2022 09:12:20.399 [9144:29528:0119/091220.399:ERROR:template_url_service.cc(1063)] Search Engines datatype error was encountered: ProcessSyncChanges failed on ChangeType ACTION_DELETE

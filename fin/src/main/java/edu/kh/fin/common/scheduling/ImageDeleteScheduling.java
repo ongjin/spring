@@ -40,7 +40,7 @@ public class ImageDeleteScheduling {
 	public void imageDelete() { 
 		
 		String serverPath = servletContext.getRealPath("/resources/images/board");
-		// -> 이미지가 저장되어 있는 실제 경
+		// -> 이미지가 저장되어 있는 실제 경로
 		
 		// 지정된 경로에 있는 모든 파일 리스트를 File 배열로 반환
 		// File 객체 : 파일을 참조할 수 있는 객체

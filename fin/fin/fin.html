@@ -12,10 +12,10 @@
 </head>
 
 <body>
-    <div id="map" style="width: 100%; height:500px; text-align: center;">
+    <div id="map" style="width: 100%; height:900px; text-align: center;">
         <div id="menu-warp">
-            <div class="option">
-                내 주변
+            <div class="option" style="text-align: center; cursor: pointer;">
+                내 위치로 이동<img width="15" height="15" src="images/gps.png">
             </div>
             <hr>
             <ul id="placesList">
@@ -106,55 +106,126 @@
 
                     </div>
                 </li>
+                <li class="item">
+                    <div class="map-info">
+
+                        <div class="img-img" style="width: 20%;">
+                            <img src="images/A.png">
+                        </div>
+                        
+                        <div class="container" style="width: 75%; display: inline-block;">
+                            <h3 style="margin-bottom: 10px;">루비병원</h3>
+                            <div style="margin-bottom: 10px;">심리 상담 센터</div>
+                            <div style="margin-bottom: 10px;">219m(distance) | 서울 중구 명동9길 21 4층</div>
+                            <div style="margin-bottom: 10px;">02-000-0000</div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="map-info">
+
+                        <div class="img-img" style="width: 20%;">
+                            <img src="images/A.png">
+                        </div>
+                        
+                        <div class="container" style="width: 75%; display: inline-block;">
+                            <h3 style="margin-bottom: 10px;">나사랑병원</h3>
+                            <div style="margin-bottom: 10px;">심리 상담 센터</div>
+                            <div style="margin-bottom: 10px;">428m(distance) | 서울 중구 충무로1가</div>
+                            <div style="margin-bottom: 10px;">02-000-0000</div>
+                        </div>
+
+                    </div>
+                </li>
+                <li class="item">
+                    <div class="map-info">
+
+                        <div class="img-img" style="width: 20%;">
+                            <img src="images/A.png">
+                        </div>
+                        
+                        <div class="container" style="width: 75%; display: inline-block;">
+                            <h3 style="margin-bottom: 10px;">노원구 청소년상담복지센터</h3>
+                            <div style="margin-bottom: 10px;">심리 상담 센터</div>
+                            <div style="margin-bottom: 10px;">14km(distance) | 서울특별시 노원구 덕릉로 777</div>
+                            <div style="margin-bottom: 10px;">02-000-0000</div>
+                        </div>
+
+                    </div>
+                </li>
                 
                 
             </ul>
             
         </div>
 
+        <!-- 상세 뷰 -->
         <div id="menu-view" style="visibility: hidden;">
 
-            <div class="option-view">제목</div>
+            <div class="option-view"></div>
             <div id="quit" style="float: right;">X</div>
             <hr>
 
             <div class="location-img">
                 <i class="fas fa-map-marker-alt"></i>
-                <span class="location-span">서울특별시 노원구 OO로 45길 14-15 OO빌딩</span>
+                <span class="location-span">병원 위치</span>
             </div>
 
             <div class="tel-number" >
                 <i class="fas fa-phone-alt"></i>
-                <span class="location-tel">02-000-0000</span>
+                <span class="location-tel">병원 번호</span>
             </div>
 
             <div class="internet">
                 <i class="fab fa-internet-explorer"></i>
-                <span class="internet-span">http://127.0.0.1:5500/fin/fin.html</span>
+                <a href="#"><span class="location-internet">주소</span></a>
             </div>
 
-            <div class="AD" style="border: 1px solid black; height: 50px; line-height: 48px;">
+            <div class="AD" style="text-align: center; border: 1px solid black; height: 50px; line-height: 48px;">
                 광고
             </div>
 
-            <div style="border: 1px solid black;"></div>
+            <!-- hr 태그 대신 -->
+            <div style="border-top: 1px solid black;"></div>
 
+        
             <div class="pro-information">
-                <b>상담관련 정보</b>
-                <b>상담</b>
-                <span>아동상담</span>
-                <b>심리상담</b>
-                <span>발달검사, 진로/적성검사</span>
+                <div class="talk-b-info" style="margin-bottom: 20px;">
+                    <h3><b>상담관련 정보</b></h3>
+                </div>
+                <div>
+                    <b>상담 : </b>
+                    <span class="talk-b-span1">아동상담</span>
+                </div>
+                <div>
+                    <b>심리검사 : </b>
+                    <span class="talk-b-span2">발달검사, 진로/적성검사</span>
+                </div>
+                <div style="color: rgb(114, 114, 114);">· 모든 정보는 변경이 있을 수 있습니다. 반드시 전화 확인 후 방문해주세요.</div>
+                <a class="admin-query" href="#"><div style="color: rgb(114, 114, 114); float: right;">정보 수정 요청 →</div></a>
             </div>
             
         </div>
     </div>
+
+    <script>
+        var hospLocation = [];
+        var hospLocationSplit = [];
+
+        var hospiName;
+
+        for(let i = 0; i < $(".map-info").length; i++){
+            hospLocation[i] = $(".map-info").eq(i).children().last().children().last().prev().text()
+            hospLocationSplit[i] = hospLocation[i].split("| ")[1];
+        }
+
+    </script>
     
 
     <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a"></script> -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services"></script>
     <script src="js/fin.js"></script>
-    <script src="js/common.js"></script>
 </body>
 
 </html>

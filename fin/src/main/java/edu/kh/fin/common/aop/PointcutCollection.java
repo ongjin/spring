@@ -9,6 +9,6 @@ public class PointcutCollection {
 	public void controllerPointcut() {}
 	
 	
-	@Pointcut("execution(* edu.kh.fin..*Controller.*(..))")
+	@Pointcut("execution(* edu.kh.fin..*ServiceImpl.*(..))")
 	public void serviceImplPointcut() {}
 }

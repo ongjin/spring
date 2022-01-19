@@ -5,7 +5,32 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2022-01-17T17:51:06Z</updated>
+  <updated>2022-01-18T20:00:00Z</updated>
+  <entry>
+    <title>This Week in Spring - January 18th, 2022</title>
+    <link rel="alternate" href="https://spring.io/blog/2022/01/18/this-week-in-spring-january-18th-2022" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2022-01-18:4674</id>
+    <updated>2022-01-18T20:00:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another jam-packed, fun-filled, rock&amp;rsquo;em sock&amp;rsquo;em installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! It&amp;rsquo;s the 18th of January and I&amp;rsquo;m feelin&amp;rsquo; great because I just got back from a three-day weekend. Here in the US, we celebrated on Monday the life of the good Dr. Martin Luther King Jr., a civil rights activist who advanced the plight of African American civil rights. Dr. King is &lt;em&gt;another&lt;/em&gt; one of my &lt;em&gt;favorite&lt;/em&gt; doctors, along with Drs. Syer, Strange, Who, Subramaniam, and Pollack.&lt;/p&gt;
+&lt;p&gt;How&amp;rsquo;re you? We&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it! &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/13/a-bootiful-podcast-spring-cloud-data-flow-legend-sabby-anandan"&gt;A Bootiful Podcast: Spring Cloud Data Flow legend Sabby Anandan&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/14/first-spring-data-2022-0-0-and-2021-2-0-milestones-released"&gt;First Spring Data 2022.0.0 and 2021.2.0 milestones released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/cote/status/1480944939504738305?s=12"&gt;Michael Cot? on Twitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;the Oracle Java team&amp;rsquo;s &lt;a href="https://twitter.com/sharat_chander/status/1481749955215646723?s=12"&gt;Sharat Chander (@sharat_chandler) recently took time to thank me&lt;/a&gt;, along with my heroes and &lt;a href="https://bootifulpodcast.fm"&gt;Bootiful Podcast&lt;/a&gt; guests &lt;a href="https://twitter.com/venkat_s"&gt;Dr. Venkat Subramaniam (@venkat_s)&lt;/a&gt; and &lt;a href="https://twitter.com/mraible"&gt;Matt Raible (@mraible)&lt;/a&gt;, for our contributions to the Java ecosystem. I want to return the favor, Sharat, here on this very large platform: &lt;em&gt;thank YOU&lt;/em&gt; for all you&amp;rsquo;ve done for the community. You&amp;rsquo;re an inspiration.&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/14/spring-data-2021-1-sr1-and-2021-0-sr8-released"&gt;Spring Data 2021.1 SR1 and 2021.0 SR8 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/13/spring-framework-6-0-0-m2-and-5-3-15-available-now"&gt;Spring Framework 6.0.0-M2 and 5.3.15 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/17/spring-rest-docs-2-0-6-release"&gt;Spring REST Docs 2.0.6.RELEASE&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/17/spring-rest-docs-3-0-0-m1"&gt;Spring REST Docs 3.0.0-M1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/17/spring-security-6-0-0-m1-and-5-7-0-m1-available-now"&gt;Spring Security 6.0.0-M1 and 5.7.0-M1 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/JavaAtMicrosoft/status/1481348027428208641"&gt;An update about the rollout of the Microsoft Build of OpenJDK on Azure Platform Services &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring REST Docs 3.0.0-M1</title>
     <link rel="alternate" href="https://spring.io/blog/2022/01/17/spring-rest-docs-3-0-0-m1" />
@@ -535,22 +560,6 @@ type Customer {&#xD;
 &lt;/ul&gt;
 &lt;p&gt;Happy holidays and happy new year! &lt;/p&gt;
 &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/xhNGqTwsGw0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 2.6.2 available now</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/12/21/spring-boot-2-6-2-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Scott Frederick</name>
-    </author>
-    <id>tag:spring.io,2021-12-21:4655</id>
-    <updated>2021-12-21T21:25:00Z</updated>
-    <content type="html">&lt;p&gt;&lt;strong&gt;Update Jan 5: 2022:&lt;/strong&gt; The Spring Framework version in this release includes fixes for &lt;a href="https://tanzu.vmware.com/security/cve-2021-22060"&gt;CVE-2021-22060&lt;/a&gt; whose official publication was deferred until today since many people take time off at the end of the year.&lt;/p&gt;
-&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.6.2&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
-&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.6.2"&gt;55 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.6.2/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
