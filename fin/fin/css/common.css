@@ -1,5 +1,6 @@
 /* css reset */
-/* *:not(body,html){
+*:not(body,html){
+    /* border: 0.1px solid grey; */
     box-sizing: border-box;
     }
 html, body, div, span, applet, object, iframe,
@@ -21,7 +22,8 @@ time, mark, audio, video {
 	font-size: 15px;
 	font: inherit;
 	vertical-align: baseline;
-} */
+    font-family: 'Noto Sans KR', sans-serif;
+}
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -62,6 +64,28 @@ hr{
 .light-brown{
     color: #E5D4C5;
 }
+.grey{
+    color: #f8f8f8;
+}
+
+.light_grey{
+    color: #EDEDED;
+}
+
+.light_brown_bg{
+    background-color: #E5D4C5;
+}
+.dark_brown_bg{
+    background-color: #A59999;
+}
+.grey_bg{
+    background-color: #F8F8F8;
+}
+
+.light_grey_bg{
+    background-color: #EDEDED;
+}
+
 
 .main_wrap{
     width: 70%;
@@ -144,6 +168,10 @@ a{
     position: relative;
 }
 
+.header_menu_wrap .dep1 > li:nth-child(4){
+    width:19%;
+}
+
 .header_menu_wrap .dep1 > li>ul{
     position: absolute;
     width: 100%;
@@ -218,6 +246,21 @@ a{
     margin-bottom: 15px;
 }
 
+/* ----------- font-size 변경 ----------- */
+@media screen and (max-width: 950px) {
+    .header_menu_wrap .dep1 > li{
+        font-size: 13px;
+    }
+    .side_menu > h3{
+        font-size: 18px;
+    }
+    .side_menu > ul > li{
+        font-size: 16px;
+    }
+    .side_menu > ul > li > ul > li{
+        font-size: 13px;
+    }
+}
 
 /* -----------모바일----------- */
 @media screen and (max-width: 768px) {
@@ -247,6 +290,10 @@ a{
         text-align: left;
         font-size: 17px;
     }
+    .header_menu_wrap .dep1 > li:nth-child(4) {
+        width: 100%;
+    }
+
     .header_menu_wrap .dep1 > li>ul{
         position: initial;
         margin-left: 20px;
@@ -303,8 +350,9 @@ a{
         display: none;
     }
 }
-
+button, textarea, input, select{
+    font-family: 'Noto Sans KR', sans-serif;
+}
 
 
 /* -----------푸터 ------------- */
-

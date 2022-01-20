@@ -1,0 +1,18 @@
+.main_content{padding: 60px 0 0 20px;}
+.secession-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
+
+.title{display: block; text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 20px;}
+.content{font-size: 12px; font-weight: bold; color: rgb(95, 95, 95);}
+
+.ok-pass{margin-top: 50px; width: 100%;}
+.ok-pass > *{text-align: center; margin-bottom: 10px;}
+
+
+input{outline: none;}
+.inputPass{border: 1px solid #ccc; width: 200px; border-radius: 5px; height: 30px;}
+
+.csdiv{text-align: center; margin-top: 20px;}
+#cancel, #update{border: none; width: 120px; padding: 5px; border-radius: 5px;}
+#cancel{background-color: rgb(122, 122, 122);}
+#update{background-color: #ccc;}
+#cancel:hover, #update:hover{cursor: pointer;}

@@ -1,0 +1,22 @@
+.pro-img > img{
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+}
+.pro-img{
+    display: inline-block;
+    width: 140px;
+    margin-bottom: 20px;
+}
+.pro-info{
+    display: inline-block;
+    width: 70%;
+    height: 140px;
+    vertical-align: top;
+}
+.pro-wish-list{
+    margin: 10px 0 20px 0;
+    border-bottom: 2px solid #ededed;
+}
+.wish-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138);}
+.main_content{padding: 60px 0 0 20px;}

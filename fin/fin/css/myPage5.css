@@ -1,0 +1,32 @@
+.main_content{padding: 60px 0 0 20px;}
+.update-mypage{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
+
+td{border: 0.1px solid #ccc;}
+table{width: 100%; margin-top: 10px;}
+td:first-child{
+    height: 50px; 
+    line-height: 48px; 
+    padding-left: 10px; 
+    width: 150px; 
+    font-weight: bold; 
+    font-size: 13px;
+}
+
+td:not(first-child){
+    padding-left: 10px; 
+    font-size: 13px;
+}
+
+.pass{width: 200px;}
+.nickname{width: 200px;}
+.email-input{width: 200px;}
+.ph{width: 50px;}
+.csdiv{text-align: center; margin-top: 20px;}
+#cancel, #update{border: none; width: 120px; padding: 5px; border-radius: 5px;}
+#cancel{background-color: rgb(122, 122, 122);}
+#update{background-color: #ccc;}
+#cancel:hover, #update:hover{cursor: pointer;}
+
+.pass, .nickname, .email-input, .ph{border: 0.3px solid #ccc; border-radius: 5px;}
+
+input{outline: none;}

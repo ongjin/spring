@@ -1,0 +1,21 @@
+.main_content{padding: 60px 0 0 20px;}
+.board-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138);}
+.div-btn-info{margin-top: 10px; display: flex; height: 35px; line-height: 22px;}
+.div-btn{width: 25% !important;}
+.div-btn{
+    display: inline-block; border: 1px solid #ccc;
+    text-align: center;
+    width: 140px;
+    padding: 5px;
+    color: white;
+    background-color: rgb(155, 150, 143);
+}
+table{width: 100%;}
+thead > tr > th:nth-child(1){padding-bottom: 10px}
+thead > tr > th:nth-child(1), td:nth-child(1){width: 10%;}
+thead > tr > th:nth-child(2), td:nth-child(2){width: 70%;}
+thead > tr > th:nth-child(3), td:nth-child(3){width: 10%;}
+thead > tr > th:nth-child(4), td:nth-child(4){width: 10%; }
+.board-view > td{text-align: center; padding: 20px;}
+.board-view > td:nth-child(2){text-align: start;}
+

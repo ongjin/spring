@@ -22,20 +22,11 @@ var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 
-// 마커가 표시될 위치입니다 
-var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
 
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
 
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-// 현재 위치
+var imageSrc, imageSize, imageOption, markerImage, markerPosition, marker1;
+// 현재 위치담을 변수 선언
 var currentPos;
-// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-marker.setMap(null);
 function locationLoadSuccess(pos) {
     // 현재 위치 받아오기
     currentPos = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
@@ -48,9 +39,31 @@ function locationLoadSuccess(pos) {
         position: currentPos
     });
 
+    imageSrc = 'images/AA.png', // 마커이미지의 주소입니다    
+    imageSize = new kakao.maps.Size(80, 83), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+      
+    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+        markerPosition = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude); // 마커가 표시될 위치입니다
+
+    // 마커를 생성합니다
+    marker1 = new kakao.maps.Marker({
+        position: markerPosition, 
+        image: markerImage // 마커이미지 설정 
+    });
+
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker1.setMap(map);  
+    map.setCenter(markerPosition);
+
+
+
+
     // 기존에 마커가 있다면 제거
     marker.setMap(null);
-    marker.setMap(map);
+    // 마커가 지도 위에 표시되도록 설정합니다
+    // marker.setMap(map);
 };
 function locationLoadError(pos) {
     alert('위치 정보를 가져오는데 실패했습니다.');
@@ -58,10 +71,10 @@ function locationLoadError(pos) {
 function getCurrentPosBtn() {
     navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
 };
+getCurrentPosBtn();
 
-$(function () {
-    getCurrentPosBtn();
-});
+
+
 
 
 // 미리 병원 정보들 배열에 저장
@@ -72,7 +85,7 @@ var distance = [];
 // 병원위치 담을 곳
 var hospi = [];
 // 결과값으로 받은 위치를 마커로 표시합니다
-var marker = [];
+var markerArr = [];
 // 인포윈도우로 장소에 대한 설명을 표시합니다
 var infowindow;
 var linePath = [];
@@ -83,26 +96,28 @@ for(let i = 0; i < $(".map-info").length; i++){
         // status == OK or ZERO_RESULT
 
         // 정상적으로 검색이 완료됐으면 
-        if (status === kakao.maps.services.Status.OK) {
-
+        if (status == kakao.maps.services.Status.OK) {
+            
             hospi[i] = new kakao.maps.LatLng(result[0].y, result[0].x);
             // var linePath = [ new daum.maps.LatLng(33.452344169439975, 126.56878163224233), new daum.maps.LatLng(33.452739313807456, 126.5709308145358)];
             // 내 위치 ~ 병원[i]의 직선거리 계산을 위한 배열로 저장
             linePath[i] = [currentPos, hospi[i]];
+            console.log("hospi[i] : " + hospi[i]);
+            console.log("currentPos : " + currentPos);
 
             // 결과값으로 받은 위치를 마커로 표시합니다
-            marker[i] = new kakao.maps.Marker({
+            markerArr[i] = new kakao.maps.Marker({
                 map: map,
                 position: hospi[i]
             });
-            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-            map.setCenter(currentPos);
+            // // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            // map.setCenter(currentPos);
             
         } else if (status == "ZERO_RESULT") {
             alert("검색결과가 없습니다.");
         }
         polyline[i] = new daum.maps.Polyline({
-            path: linePath[i], // 선을 구성하는 좌표배열 입니다
+            path: linePath[i] // 선을 구성하는 좌표배열 입니다
         });
         distance[i] = Math.round(polyline[i].getLength());
         console.log(distance[i]);
@@ -136,7 +151,7 @@ $(document).on("click", ".map-info", function () {
 
     for(key in info)    info[key].close();
     
-    infowindow.open(map, marker[index]);
+    infowindow.open(map, markerArr[index]);
     info[index] = infowindow;
 
     // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
@@ -145,12 +160,12 @@ $(document).on("click", ".map-info", function () {
     // $(".admin-query").attr("href", "문의사항으로 이동");
 });
 
-// ?
+// qasdtfdgfa
 $(document).on("click", "#quit", function () {
     $("#menu-view").css("visibility", "hidden");
 });
 
 $(document).on("click", ".option", function(){
-        // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
+    // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
     map.panTo(currentPos);
 });
