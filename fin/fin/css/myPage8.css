@@ -1,0 +1,9 @@
+.main_content{padding: 60px 0 0 20px;}
+
+.mute-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
+
+.mute-info{margin-top: 40px; margin-right: 20px;}
+.mute-delete{border: none; width: 100px; height: 100%; margin-right: 20px; border-radius: 5px; background-color: #ccc;}
+.mute-delete:hover{cursor: pointer;}
+.mute-td{width: 100%; padding: 10px;}
+.mute-tr{border: 0.3px solid #ccc; border-radius: 10px;}

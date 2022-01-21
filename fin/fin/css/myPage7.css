@@ -1,0 +1,100 @@
+.main_content{padding: 60px 0 0 20px;}
+.postscript-page{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
+
+.postscript-info{display: flex; font-weight: bold;}
+
+.date{width: 100px; min-width: 100px;}
+.pro-name{width: 120px; min-width: 120px;}
+.chat{width: 50px; min-width: 50px;}
+.star-img{width: 70px; min-width: 70px;}
+.date, .chat, .star-img, .pro-name, .cdBtn{width: 20%; display: flex; text-align: left;}
+.cdBtn{width: 50%; text-align: end; justify-content: end;}
+.update, .delete{border: none; width: 70px; border-radius: 5px; background-color: #ccc; cursor: pointer;}
+
+.postscript{background-color: rgb(248, 248, 248); margin-top: 5px; margin-bottom: 10px; padding: 20px;}
+
+
+/* 모달창 */
+#modal.modal-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#modal .modal-window {
+    background: rgba(177, 177, 177, 0.7);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    height: 60px;
+    position: relative;
+    padding: 10px;
+}
+.content {
+    background: white;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 13.5px );
+    -webkit-backdrop-filter: blur( 13.5px );
+    /* border-radius: 10px; */
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 400px;
+    /* height: 500px; */
+    position: relative;
+    top: -30px;
+    padding: 10px;
+}
+#modal .title {
+    padding-left: 10px;
+    display: inline;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    
+}
+
+#modal .close-area {
+    display: inline;
+    float: right;
+    padding-right: 10px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px gray;
+    color: white;
+    font-size: 25px;
+}
+
+#modal .content {
+    margin-top: 20px;
+    padding: 0px 10px;
+    text-shadow: 1px 1px 2px gray;
+    color: black;
+}
+
+.content-textarea{resize: none; width: 377px; height: 150px; outline: none; border: 1px solid #ccc;}
+
+.content-update, .content-delete{
+    border: none;
+    width: 150px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#con{text-align: center;}
+.postscript-img{display: flex; margin: 10px 0 10px 0; justify-content: space-between;}
+.postscript-cut{font-size: 10px; font-weight: bold; text-shadow: none; color: rgb(175, 175, 175);}

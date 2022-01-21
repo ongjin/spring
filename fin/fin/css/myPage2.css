@@ -10,12 +10,12 @@
     color: white;
     background-color: rgb(155, 150, 143);
 }
-table{width: 100%;}
+table{width: 100%; table-layout: fixed;}
 thead > tr > th:nth-child(1){padding-bottom: 10px}
 thead > tr > th:nth-child(1), td:nth-child(1){width: 10%;}
-thead > tr > th:nth-child(2), td:nth-child(2){width: 70%;}
-thead > tr > th:nth-child(3), td:nth-child(3){width: 10%;}
-thead > tr > th:nth-child(4), td:nth-child(4){width: 10%; }
+thead > tr > th:nth-child(2), td:nth-child(2){width: 50%; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;}
+thead > tr > th:nth-child(3), td:nth-child(3){width: 20%;}
+thead > tr > th:nth-child(4), td:nth-child(4){width: 20%;}
 .board-view > td{text-align: center; padding: 20px;}
 .board-view > td:nth-child(2){text-align: start;}
 

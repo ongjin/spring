@@ -2,7 +2,7 @@
 .update-mypage{font-weight: bold; font-size: 28px; color: rgb(138, 138, 138); display: inline-block;}
 
 td{border: 0.1px solid #ccc;}
-table{width: 100%; margin-top: 10px;}
+table{width: 95%; margin-top: 10px; margin-right: 20px;}
 td:first-child{
     height: 50px; 
     line-height: 48px; 
