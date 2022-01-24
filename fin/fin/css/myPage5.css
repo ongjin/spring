@@ -7,8 +7,8 @@ td:first-child{
     height: 50px; 
     line-height: 48px; 
     padding-left: 10px; 
-    width: 150px; 
-    font-weight: bold; 
+    width: 30%; 
+    font-weight: bold;
     font-size: 13px;
 }
 
@@ -17,16 +17,52 @@ td:not(first-child){
     font-size: 13px;
 }
 
-.pass{width: 200px;}
-.nickname{width: 200px;}
-.email-input{width: 200px;}
-.ph{width: 50px;}
+.pass{width: 70%;}
+.nickname{width: 70%;}
+.email-input{width: 70%;}
+.ph{width: 20%;}
 .csdiv{text-align: center; margin-top: 20px;}
-#cancel, #update{border: none; width: 120px; padding: 5px; border-radius: 5px;}
+#cancel, #update{border: none; width: 35%; padding: 5px; border-radius: 5px;}
 #cancel{background-color: rgb(122, 122, 122);}
 #update{background-color: #ccc;}
 #cancel:hover, #update:hover{cursor: pointer;}
 
-.pass, .nickname, .email-input, .ph{border: 0.3px solid #ccc; border-radius: 5px;}
+input{border: 0.3px solid #ccc; border-radius: 5px;}
 
 input{outline: none;}
+.ph{text-align: center;}
+
+
+@media screen and (max-width: 768px) and (min-width: 0px) {
+
+    .main_content{padding: 0;}
+    .board-page{margin-left: 20px;}
+    .footer_wrap{display: none;}
+    .update-mypage{padding: 20px;}
+
+    #update, #cancel{width: 49%;}
+    table{display: none;}
+    .update-img{text-align: center;}
+    .update-img > img{border-radius: 50%; width: 8em; height: 8em; cursor: pointer;}
+
+    .update-info > div:nth-child(2){text-align: center; padding: 10px;}
+    .update-info > div{padding-left: 10px;}
+
+    .updateName, .updateNN, .updateId, .updateEmail, .updatePhone, .updatePW{font-weight: bold; padding-bottom: 5px;}
+    
+    .pwResult > *:not(button){width: 49%;}
+
+    .pwResult > button{width: 100%; border: none; background-color: #ccc; cursor: pointer;}
+
+    .pwSpan{margin-left: 30px; color: red;}
+
+
+}@media screen and (max-width: 950px) and (min-width: 768px)  {
+    
+    .update-info{display: none;}
+    
+}@media screen and (min-width: 950px) {
+
+    .update-info{display: none;}
+    
+}

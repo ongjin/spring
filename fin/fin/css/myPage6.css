@@ -9,15 +9,15 @@
 
 
 input{outline: none;}
-.inputPass{border: 1px solid #ccc; width: 200px; border-radius: 5px; height: 30px;}
+.inputPass{border: 1px solid #ccc; width: 40%; border-radius: 5px; height: 30px;}
 
 .csdiv{text-align: center; margin-top: 20px;}
-#cancel, #update{border: none; width: 120px; padding: 5px; border-radius: 5px;}
+#cancel, #update{border: none; width: 20%; padding: 5px; border-radius: 5px;}
 #cancel{background-color: rgb(122, 122, 122);}
 #update{background-color: #ccc;}
 #cancel:hover, #update:hover{cursor: pointer;}
 
-.secession-body{margin-right: 20px;}
+
 
 @media screen and (max-width: 768px)  {
     .secession-page{font-weight: bold; font-size: 20px; color: rgb(138, 138, 138); display: inline-block;}

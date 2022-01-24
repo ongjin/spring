@@ -180,7 +180,7 @@
                     </div>
                 </div>
                 <div class="postscript">
-                    진짜 상담 개못해요
+                    상담 못하는듯
                 </div>
 
             </article>
@@ -234,9 +234,9 @@
     </footer>
     <script>
         const loremIpsum = document.getElementById("lorem-ipsum")
-        fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
-            .then(response => response.text())
-            .then(result => loremIpsum.innerHTML = result)
+        // fetch("https://baconipsum.com/api/?type=all-meat&paras=200&format=html")
+        //     .then(response => response.text())
+        //     .then(result => loremIpsum.innerHTML = result)
         const closeBtn = modal.querySelector(".close-area")
         closeBtn.addEventListener("click", e => {
             modal.style.display = "none"

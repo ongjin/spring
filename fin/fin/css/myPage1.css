@@ -5,19 +5,26 @@
 
 td > img{
     border-radius: 100%;
-    width: 100px;
-    height: 100px;
+    width: 6em;
+    height: 6em;
 }
 
 table{width: 100%; margin-top: 20px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;}
 table tr:not(:first-of-type){display: flex; padding-top: 20px; padding-bottom: 20px; border-top: 1px solid #ccc;}
 table tr{display: flex; padding-top: 20px; padding-bottom: 20px;}
 
-tr > td:first-of-type{width: 150px;}
+tr > td:first-of-type{min-width: 120px; width: 120px;}
 tr > td:nth-of-type(2){width: 70%; display: grid;}
 
 .bold14px{font-weight: bold; font-size: 14px;}
 .bold12ccc{font-weight: bold; font-size: 12px; color: #ccc;}
-.pro-content{font-weight: bold; font-size: 12px; color: #ccc; min-width: 230px;}
+.pro-content{font-weight: bold; font-size: 12px; color: #ccc; min-width: 50%;}
 
-.lovewish{cursor: pointer; width: 100px; height: 100px;}
+.lovewish{cursor: pointer; width: 6em; height: 6em;}
+
+@media screen and (max-width: 768px)  {
+    .main_content{padding: 0;}
+    .wish-page{margin-left: 20px;}
+    .footer_wrap{display: none;}
+    .profile{margin: 0 10px 0 10px;}
+}

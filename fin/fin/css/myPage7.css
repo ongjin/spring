@@ -3,15 +3,16 @@
 
 .postscript-info{display: flex; font-weight: bold;}
 
-.date{width: 100px; min-width: 100px;}
-.pro-name{width: 120px; min-width: 120px;}
-.chat{width: 50px; min-width: 50px;}
-.star-img{width: 70px; min-width: 70px;}
+
+.date{width: 22%; min-width: 22%;}
+.pro-name{width: 26%; min-width: 26%;}
+.chat{width: 9%; min-width: 9%;}
+.star-img{width: 20%; min-width: 20%;}
 .date, .chat, .star-img, .pro-name, .cdBtn{width: 20%; display: flex; text-align: left;}
 .cdBtn{width: 50%; text-align: end; justify-content: end;}
-.update, .delete{border: none; width: 70px; border-radius: 5px; background-color: #ccc; cursor: pointer;}
+.update, .delete{border: none; width: 45%; border-radius: 5px; background-color: #ccc; cursor: pointer;}
 
-.postscript{background-color: rgb(248, 248, 248); margin-top: 5px; margin-bottom: 10px; padding: 20px;}
+.postscript{background-color: rgb(230, 230, 230); margin-top: 5px; margin-bottom: 10px; padding: 20px;}
 
 
 /* 모달창 */
@@ -98,3 +99,11 @@
 #con{text-align: center;}
 .postscript-img{display: flex; margin: 10px 0 10px 0; justify-content: space-between;}
 .postscript-cut{font-size: 10px; font-weight: bold; text-shadow: none; color: rgb(175, 175, 175);}
+
+
+
+@media screen and (max-width: 768px)  {
+    .main_content{padding: 0;}
+    .board-page{margin-left: 20px;}
+    .footer_wrap{display: none;}
+}

@@ -15,3 +15,13 @@ function colorSet(){
 }
 colorSet();
 
+$(document).on("click", ".message-view", function(){
+
+    const per = $(this).children().eq(0).text();
+    const msg = $(this).children().eq(1).text();
+    const date = $(this).children().eq(2).text();
+
+    $("#modal").css("display", "flex");
+    $(".postscript-cut").text("TO. " + per);
+
+});
