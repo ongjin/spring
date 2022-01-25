@@ -1,8 +1,0 @@
-package edu.kh.fin.chat.model.dao;
-
-import org.springframework.stereotype.Repository;
-
-@Repository
-public class ChatDAO {
-
-}

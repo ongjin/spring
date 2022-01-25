@@ -52,3 +52,17 @@ $("textarea").on("input", function(){
 
     adjustHeight(); // 함수를 실행하면 자동으로 textarea의 높이 조절
 });
+
+
+$(".dark-brown").on("click", function(){
+    const text = $(".insertReply");
+
+    if(text.css("display") == "flex"){
+
+        text.css("display", "none");
+        
+    }else{
+
+        text.css("display", "flex");
+    }
+});

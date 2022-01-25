@@ -1,7 +1,7 @@
 /* 컴퓨터 CSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS */
 #menu-warp{
     position: absolute;
-    top: 0;
+    top: 720px;
     left: 0;
     bottom: 0;
     width: 300px;
@@ -72,4 +72,27 @@ div#map{
 
 #menu-view div:not(:first-of-type){
     margin-bottom: 10px;
+}
+
+
+
+@media screen and (max-width: 1200px) and (min-width: 0px) {
+    #menu-warp{
+        margin: 0;
+        width: 100%;
+        bottom: -100px;
+        /* animation: overSlide 1s ease-out; */
+    }
+
+    @keyframes overSlide {
+        from{
+            top: 760px;
+        }to{
+            top: 0px;
+        }
+    }
+    
+}@media screen and (min-width: 1200px) {
+    
+
 }

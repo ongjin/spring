@@ -1,0 +1,18 @@
+package edu.kh.junit;
+
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+
+// JUnit에 내장된 Runner 대신 SpringJUnit4ClassRunner를 이용하여 테스트를 수행
+@RunWith(SpringJUnit4ClassRunner.class)
+
+// COntroller 및 웹 환경에서 사용되는 bean들을 자동으로 생성해서 등록
+@WebAppConfiguration// == web.xml
+
+
+@ContextConfiguration({})
+public class MemberControllerTest {
+
+}

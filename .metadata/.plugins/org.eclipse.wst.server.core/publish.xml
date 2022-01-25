@@ -2,4 +2,5 @@
 <publish-info>
   <server id="najavavara server" path="publish1.dat"/>
   <server id="fin server" path="publish0.dat"/>
+  <server id="test server" path="publish2.dat"/>
 </publish-info>

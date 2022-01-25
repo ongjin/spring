@@ -1,5 +1,72 @@
+$("#map").css("height", window.innerHeight);
+window.onresize = function(){
+    var innerWidth = window.innerWidth;
+    var innerHeight = window.innerHeight;
+
+    $("#map").css("height", innerHeight);
+
+    if(innerWidth <= 1200){
+
+    }
+}
+
+var IE = document.all ? true : false;
+
+var mX = 0;
+var mY = 0;
+
+if(!IE) {
+document.addEventListener("mousemove", getMousePosition, false);
+}
+
+// 마우스 커서 위치 좌표로 나타내기 ***************************************************************************
+function getMousePosition(event) {
+    mX = event.clientX + document.body.scrollLeft;
+    mY = event.clientY + document.body.scrollTop;
+}
+
+function getMouseX(event) {
+    if(IE) {
+        return (event.clientX + document.body.scrollLeft);
+    }
+    else {
+        return mX;
+    }
+}
+
+function getMouseY(event) {
+    if(IE) {
+        return (event.clientY + document.body.scrollTop);
+    }
+    else {
+        return mY;
+    }
+}
+
+$(document).on("click", "#map", function(){
+    console.log("X : " + getMouseX(), "Y : " + getMouseY());
+});
+
+
+
+const target = document.getElementById('menu-warp'); // 요소의 id 
+
+const clientRect = target.getBoundingClientRect(); // DomRect 구하기 (각종 좌표값이 들어있는 객체)
+const relativeTop = clientRect.top; // Viewport의 시작지점을 기준으로한 상대좌표 Y 값.
+
+const scrolledTopLength = window.pageYOffset; // 스크롤된 길이
+const absoluteTop = scrolledTopLength + relativeTop; // 절대좌표
+
+console.log(absoluteTop);
+
+
+// 마우스 커서 위치 좌표로 나타내기 ***************************************************************************
+
+
+
+
 // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+// var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -7,12 +74,11 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 3 // 지도의 확대 레벨
     };
 
-// 지도를 생성합니다    
+// 지도를 생성합니다
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 var mapTypeControl = new kakao.maps.MapTypeControl();
-
 // 지도에 컨트롤을 추가해야 지도위에 표시됩니다
 // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
 map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
@@ -24,7 +90,8 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 
 
-var imageSrc, imageSize, imageOption, markerImage, markerPosition, marker1;
+
+// var imageSrc, imageSize, imageOption, markerImage, markerPosition, marker1;
 // 현재 위치담을 변수 선언
 var currentPos;
 function locationLoadSuccess(pos) {
@@ -32,30 +99,31 @@ function locationLoadSuccess(pos) {
     currentPos = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
 
     // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
-    // map.panTo(currentPos);
+    map.panTo(currentPos);
 
     // 마커 생성
     var marker = new kakao.maps.Marker({
         position: currentPos
     });
 
-    imageSrc = 'images/AA.png', // 마커이미지의 주소입니다    
-    imageSize = new kakao.maps.Size(80, 83), // 마커이미지의 크기입니다
-    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+    // imageSrc = 'images/AA.png', // 마커이미지의 주소입니다    
+    // imageSize = new kakao.maps.Size(80, 83), // 마커이미지의 크기입니다
+    // imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
       
-    // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-        markerPosition = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude); // 마커가 표시될 위치입니다
+    // // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+    // markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    //     markerPosition = new kakao.maps.LatLng(pos.coords.latitude, pos.coords.longitude); // 마커가 표시될 위치입니다
 
     // 마커를 생성합니다
-    marker1 = new kakao.maps.Marker({
-        position: markerPosition, 
-        image: markerImage // 마커이미지 설정 
-    });
+    // marker1 = new kakao.maps.Marker({
+    //     position: markerPosition, 
+    //     image: markerImage // 마커이미지 설정 
+    // });
 
     // 마커가 지도 위에 표시되도록 설정합니다
-    marker1.setMap(map);  
-    map.setCenter(markerPosition);
+    // marker1.setMap(map);  
+    marker.setMap(map);  
+    // map.setCenter(markerPosition);
 
 
 
@@ -102,8 +170,8 @@ for(let i = 0; i < $(".map-info").length; i++){
             // var linePath = [ new daum.maps.LatLng(33.452344169439975, 126.56878163224233), new daum.maps.LatLng(33.452739313807456, 126.5709308145358)];
             // 내 위치 ~ 병원[i]의 직선거리 계산을 위한 배열로 저장
             linePath[i] = [currentPos, hospi[i]];
-            console.log("hospi[i] : " + hospi[i]);
-            console.log("currentPos : " + currentPos);
+            // console.log("hospi[i] : " + hospi[i]);
+            // console.log("currentPos : " + currentPos);
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             markerArr[i] = new kakao.maps.Marker({
@@ -120,7 +188,7 @@ for(let i = 0; i < $(".map-info").length; i++){
             path: linePath[i] // 선을 구성하는 좌표배열 입니다
         });
         distance[i] = Math.round(polyline[i].getLength());
-        console.log(distance[i]);
+        // console.log(distance[i]);
     });
 }
 
@@ -150,9 +218,9 @@ $(document).on("click", ".map-info", function () {
     });
 
     for(key in info)    info[key].close();
+    info[index] = infowindow;
     
     infowindow.open(map, markerArr[index]);
-    info[index] = infowindow;
 
     // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
     map.panTo(hospi[index]);
@@ -169,3 +237,4 @@ $(document).on("click", ".option", function(){
     // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
     map.panTo(currentPos);
 });
+

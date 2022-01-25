@@ -32,6 +32,7 @@ $(document).on("click", ".div-btn", function(){
     backupIndex = index;
 
     underLineDraw(line, $(this));
+    line.css("transition", "0.3s");
 });
 $(".div-btn").eq(0).click();
 
@@ -44,7 +45,9 @@ window.onresize = function(){
     var innerHeight = window.innerHeight;
 
     if(innerWidth != backupWidth){
+        // transition: 0.3s;
         underLineDraw(line, $(".div-btn").eq(backupIndex));
+        line.css("transition", "0s");
     }
     // if(innerWidth > 950){
 
