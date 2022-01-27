@@ -16,6 +16,9 @@
         
         <div id="map" style="width: 100%; text-align: center;">
             <div id="menu-warp">
+                <div class="upArrow" style="text-align: center; cursor: pointer; height: 30px;">
+                    <img width="15" height="15" src="images/upload.png">
+                </div>
                 <div class="option" style="text-align: center; cursor: pointer;">
                     내 위치로 이동<img width="15" height="15" src="images/gps.png">
                 </div>
@@ -185,6 +188,13 @@
                     <a href="#"><span class="location-internet">주소</span></a>
                 </div>
 
+                <!-- /link/to/이름,위도,경도	https://map.kakao.com/link/to/카카오판교오피스,37.402056,127.108212 -->
+                <div onclick="window.open(loadSearch());" style="position: absolute; right: 0; top: 35px; border: 1px solid #ccc; 
+                width: 70px; min-width: 70px; text-align: center; height: 30px; line-height: 28px;
+                background-color: rgba(84, 127, 207, 0.452); cursor: pointer;">
+                    길찾기
+                </div>
+
                 <div class="AD" style="text-align: center; border: 1px solid black; height: 50px; line-height: 48px;">
                     광고
                 </div>
@@ -223,13 +233,10 @@
             hospLocationSplit[i] = hospLocation[i].split("| ")[1];
         }
 
-        
-
     </script>
-    
 
-    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a"></script> -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services"></script>
+    <!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services"></script> -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f9cc932f2cb179a77079e2c667dab98a&libraries=services,clusterer,drawing"></script>
     <script src="js/fin.js"></script>
 </body>
 

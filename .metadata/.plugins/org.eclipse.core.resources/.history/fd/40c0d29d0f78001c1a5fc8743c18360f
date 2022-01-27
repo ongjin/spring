@@ -1,5 +1,0 @@
-package edu.kh.fin.common.aop;
-
-public class BeforeAspect {
-
-}

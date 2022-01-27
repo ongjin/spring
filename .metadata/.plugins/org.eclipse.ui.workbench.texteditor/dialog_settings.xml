@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Logg"/>
+		<item key="selection" value="setup"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="setup"/>
+			<item value="setup()"/>
+			<item value="maven-"/>
 			<item value="logg"/>
 			<item value="GSON"/>
 			<item value="exceptionHandler"/>
@@ -20,9 +23,6 @@
 			<item value="List&lt;"/>
 			<item value="List"/>
 			<item value="deleteImages"/>
-			<item value="수정"/>
-			<item value="jstl"/>
-			<item value="serverPath"/>
 		</list>
 		<list key="replacehistory">
 		</list>

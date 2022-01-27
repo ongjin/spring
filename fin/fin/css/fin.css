@@ -1,7 +1,7 @@
 /* 컴퓨터 CSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS */
 #menu-warp{
     position: absolute;
-    top: 720px;
+    top: 0;
     left: 0;
     bottom: 0;
     width: 300px;
@@ -9,9 +9,10 @@
     padding: 5px;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0.7);
-    z-index: 2;
+    z-index: 3;
     font-size: 12px;
     border-radius: 10px;
+    transition: 0.7s;
 }
 #menu-view{
     position: absolute;
@@ -23,7 +24,7 @@
     padding: 5px;
     overflow: auto;
     background-color: rgba(255, 255, 255, 0.7);
-    z-index: 2;
+    z-index: 4;
     font-size: 12px;
     border-radius: 10px;
 }
@@ -76,23 +77,21 @@ div#map{
 
 
 
+
+/* 모바일 */
 @media screen and (max-width: 1200px) and (min-width: 0px) {
     #menu-warp{
         margin: 0;
         width: 100%;
-        bottom: -100px;
-        /* animation: overSlide 1s ease-out; */
     }
-
-    @keyframes overSlide {
-        from{
-            top: 760px;
-        }to{
-            top: 0px;
-        }
-    }
+    .upArrow{display: flow-root; transition: 0.7s;}
+    #menu-view{visibility: hidden; width: 100%; margin: 0px}
     
-}@media screen and (min-width: 1200px) {
-    
+}@media screen and (min-width: 1200px) { /* 웹 */
+    #menu-warp{top: 0;}
+    .upArrow{display: none;}
+    #menu-view{margin: 10px 0 30px 330px; width: 300px;}
 
 }
+
+

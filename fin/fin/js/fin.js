@@ -1,66 +1,24 @@
 $("#map").css("height", window.innerHeight);
+
+const menuWarp = $("#menu-warp");
+const menuView = $("#menu-view");
+const menuAll = $("#menu-warp, #menu-view");
+
+let backupWidth = window.innerWidth;
 window.onresize = function(){
     var innerWidth = window.innerWidth;
     var innerHeight = window.innerHeight;
 
+    // $("#map") height == 웹 height
     $("#map").css("height", innerHeight);
 
-    if(innerWidth <= 1200){
+    if(innerWidth != backupWidth)   location.reload();
 
-    }
+    backupWidth = innerWidth;
+
 }
 
-var IE = document.all ? true : false;
 
-var mX = 0;
-var mY = 0;
-
-if(!IE) {
-document.addEventListener("mousemove", getMousePosition, false);
-}
-
-// 마우스 커서 위치 좌표로 나타내기 ***************************************************************************
-function getMousePosition(event) {
-    mX = event.clientX + document.body.scrollLeft;
-    mY = event.clientY + document.body.scrollTop;
-}
-
-function getMouseX(event) {
-    if(IE) {
-        return (event.clientX + document.body.scrollLeft);
-    }
-    else {
-        return mX;
-    }
-}
-
-function getMouseY(event) {
-    if(IE) {
-        return (event.clientY + document.body.scrollTop);
-    }
-    else {
-        return mY;
-    }
-}
-
-$(document).on("click", "#map", function(){
-    console.log("X : " + getMouseX(), "Y : " + getMouseY());
-});
-
-
-
-const target = document.getElementById('menu-warp'); // 요소의 id 
-
-const clientRect = target.getBoundingClientRect(); // DomRect 구하기 (각종 좌표값이 들어있는 객체)
-const relativeTop = clientRect.top; // Viewport의 시작지점을 기준으로한 상대좌표 Y 값.
-
-const scrolledTopLength = window.pageYOffset; // 스크롤된 길이
-const absoluteTop = scrolledTopLength + relativeTop; // 절대좌표
-
-console.log(absoluteTop);
-
-
-// 마우스 커서 위치 좌표로 나타내기 ***************************************************************************
 
 
 
@@ -91,6 +49,8 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 
 
+
+
 // var imageSrc, imageSize, imageOption, markerImage, markerPosition, marker1;
 // 현재 위치담을 변수 선언
 var currentPos;
@@ -105,6 +65,7 @@ function locationLoadSuccess(pos) {
     var marker = new kakao.maps.Marker({
         position: currentPos
     });
+
 
     // imageSrc = 'images/AA.png', // 마커이미지의 주소입니다    
     // imageSize = new kakao.maps.Size(80, 83), // 마커이미지의 크기입니다
@@ -123,16 +84,15 @@ function locationLoadSuccess(pos) {
     // 마커가 지도 위에 표시되도록 설정합니다
     // marker1.setMap(map);  
     marker.setMap(map);  
-    // map.setCenter(markerPosition);
-
-
-
+    map.setCenter(currentPos); 
 
     // 기존에 마커가 있다면 제거
-    marker.setMap(null);
+    // marker.setMap(null);
     // 마커가 지도 위에 표시되도록 설정합니다
     // marker.setMap(map);
+    
 };
+
 function locationLoadError(pos) {
     alert('위치 정보를 가져오는데 실패했습니다.');
 };
@@ -140,8 +100,6 @@ function getCurrentPosBtn() {
     navigator.geolocation.getCurrentPosition(locationLoadSuccess, locationLoadError);
 };
 getCurrentPosBtn();
-
-
 
 
 
@@ -165,13 +123,12 @@ for(let i = 0; i < $(".map-info").length; i++){
 
         // 정상적으로 검색이 완료됐으면 
         if (status == kakao.maps.services.Status.OK) {
-            
+
             hospi[i] = new kakao.maps.LatLng(result[0].y, result[0].x);
             // var linePath = [ new daum.maps.LatLng(33.452344169439975, 126.56878163224233), new daum.maps.LatLng(33.452739313807456, 126.5709308145358)];
             // 내 위치 ~ 병원[i]의 직선거리 계산을 위한 배열로 저장
             linePath[i] = [currentPos, hospi[i]];
-            // console.log("hospi[i] : " + hospi[i]);
-            // console.log("currentPos : " + currentPos);
+
 
             // 결과값으로 받은 위치를 마커로 표시합니다
             markerArr[i] = new kakao.maps.Marker({
@@ -188,17 +145,20 @@ for(let i = 0; i < $(".map-info").length; i++){
             path: linePath[i] // 선을 구성하는 좌표배열 입니다
         });
         distance[i] = Math.round(polyline[i].getLength());
-        // console.log(distance[i]);
     });
 }
 
-
+var getDetailAddr;
+// info 여러개 닫으려고
 var info = [];
+// 바깥에서 쓰기 위해서
+let backupIndex = 0;
 // 상세뷰 만들기
 $(document).on("click", ".map-info", function () {
 
     // 선택한 요소 인덱스
     const index = $(".map-info").index(this);
+    backupIndex = index;
 
     // 선택한 요소 제목 $(".option-view")에 만들기
     $("#menu-view").css("visibility", "visible");
@@ -225,8 +185,108 @@ $(document).on("click", ".map-info", function () {
     // 지도 이동(기존 위치와 가깝다면 부드럽게 이동)
     map.panTo(hospi[index]);
 
+    getDetailAddr = $(".map-info").eq(backupIndex).children().eq(1).children().eq(2).text().split(" | ")[1];
+
     // $(".admin-query").attr("href", "문의사항으로 이동");
 });
+
+
+
+if(window.innerWidth > 1200){
+    // 웹이면
+    menuWarp.css("top", "0").css("height", innerHeight - 20);
+
+    // menuWarp, menuView 클릭 시 
+    $(document).on("click", menuAll, function(){
+
+        // menuView 스타일에 visibility == visible true였으면
+        if(menuView.css("visibility") == "visible"){
+            // #quit가 클릭되었는지 체크하고
+            $(document).on("click", "#quit", function() {
+                // true면 menuWarp 올림
+                menuWarp.css("top", "0");
+            });
+        }
+
+    })
+}else if(window.innerWidth <= 1200){
+    menuWarp.css("top", (innerHeight - 60) + "px").css("height", innerHeight);
+    $(".upArrow > img").attr("src", "images/upload.png");
+
+    // menuWarp, menuView 클릭 시 
+    $(document).on("click", menuAll, function(){
+
+        // 병원 클릭 시
+        $(".map-info").on("click", function(){
+            if(menuView.css("visibility") == "hidden"){
+                // menuWarp 내림
+                menuWarp.css("top", (innerHeight - 60) + "px").css("height", innerHeight);
+            }
+        });
+        
+        // menuView 스타일에 visibility == visible true였으면
+        if(menuView.css("visibility") == "visible"){
+            // #quit가 클릭되었는지 체크하고
+            $(document).on("click", "#quit", function() {
+                // true면 menuWarp 올림
+                menuWarp.css("top", "0");
+            });
+        }
+
+    });
+
+
+    $(document).on("click", ".upArrow", function(){
+        
+        if($(".upArrow > img").attr("src") == "images/upload.png"){
+            $(".upArrow > img").attr("src", "images/arrow-down-sign-to-navigate.png")
+            menuWarp.css("top", "0");
+            
+        }else{
+            $(".upArrow > img").attr("src", "images/upload.png");
+            menuWarp.css("top", (innerHeight - 60) + "px");
+            
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+var myDetailAddr;
+function searchDetailAddrFromCoords(coords, callback) {
+    // 좌표로 법정동 상세 주소 정보를 요청합니다
+    geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+}
+function getHospAddress() {
+    searchDetailAddrFromCoords(currentPos, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+            myDetailAddr = !!result[0].road_address ? result[0].road_address.address_name : '';
+            console.log(myDetailAddr);
+        }   
+    });
+}
+$(function(){
+    getHospAddress();
+});
+
+
+
+function loadSearch(){
+    return 'https://map.kakao.com/?sName=' + myDetailAddr +
+    '&eName=' + getDetailAddr;
+    // return 'https://map.kakao.com/link/to/' +
+    // hospLocationSplit[backupIndex] + ',' + la + ',' + ma + '';
+}
+loadSearch();
 
 // qasdtfdgfa
 $(document).on("click", "#quit", function () {
@@ -238,3 +298,43 @@ $(document).on("click", ".option", function(){
     map.panTo(currentPos);
 });
 
+
+// function isBrowserCheck(){ 
+// 	const agt = navigator.userAgent.toLowerCase(); 
+//     if(agt.split("edg").length > 1) return 'Edge';
+// 	if (agt.indexOf("chrome") != -1) return 'Chrome';
+// 	if (agt.indexOf("opera") != -1) return 'Opera';
+// 	if (agt.indexOf("staroffice") != -1) return 'Star Office';
+// 	if (agt.indexOf("webtv") != -1) return 'WebTV';
+// 	if (agt.indexOf("beonex") != -1) return 'Beonex';
+// 	if (agt.indexOf("chimera") != -1) return 'Chimera';
+// 	if (agt.indexOf("netpositive") != -1) return 'NetPositive';
+// 	if (agt.indexOf("phoenix") != -1) return 'Phoenix';
+// 	if (agt.indexOf("firefox") != -1) return 'Firefox';
+// 	if (agt.indexOf("safari") != -1) return 'Safari';
+// 	if (agt.indexOf("skipstone") != -1) return 'SkipStone';
+// 	if (agt.indexOf("netscape") != -1) return 'Netscape';
+// 	if (agt.indexOf("mozilla/5.0") != -1) return 'Mozilla';
+// 	if (agt.indexOf("msie") != -1) { 
+//     	let rv = -1; 
+// 		if (navigator.appName == 'Microsoft Internet Explorer') { 
+// 			let ua = navigator.userAgent; var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})"); 
+// 		if (re.exec(ua) != null) 
+// 			rv = parseFloat(RegExp.$1); 
+// 		} 
+// 		return 'Internet Explorer '+rv; 
+// 	} 
+// }
+// const browser = isBrowserCheck();
+// console.log(browser);
+
+// function WinClose(){
+//     top.window.open('about:blank','_self').close(); 
+//     top.window.opener=self;
+//     top.self.close();
+// }
+
+// if(browser == "Edge"){
+//     window.location.replace("http://127.0.0.1:5500/fin/map.html");
+//     WinClose();
+// }

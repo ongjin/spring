@@ -5,7 +5,39 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2022-01-24T14:47:29Z</updated>
+  <updated>2022-01-25T23:00:00Z</updated>
+  <entry>
+    <title>This Week in Spring - January 25th, 2022</title>
+    <link rel="alternate" href="https://spring.io/blog/2022/01/25/this-week-in-spring-january-25th-2022" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2022-01-25:4683</id>
+    <updated>2022-01-25T23:00:00Z</updated>
+    <content type="html">&lt;br/&gt;
+&lt;img width = "400" src = "https://raw.githubusercontent.com/joshlong/blog-images/master/cny/tiger-resized.gif" /&gt;
+&lt;p&gt;Hi, Spring fans! Can you believe it&amp;rsquo;s already the 25th of the first month of a brand new year!? And we&amp;rsquo;re fast approaching the Lunar New Year, often also called the Chinese New Year, which will arrive next Tuesday. Reunion dinner will be on the 31st of January, and the two weeks of celebration will begin. All that to say that this is my last real chance, speaking I&amp;rsquo;m sure for the entire Tanzu team, to wish everyone around the planet (billions of people!) who celebrates a very happy Lunar New Year (Mandarin: &lt;strong&gt;ãæÒ´öá?&lt;/strong&gt; (pronounced: &lt;em&gt;xin nian kauai le&lt;/em&gt; ) / Cantonese: &lt;strong&gt;ãæÒ´öá?&lt;/strong&gt; (pronounced: &lt;em&gt;san nin fai lok&lt;/em&gt; )) and to say that we hope you enjoy prosperity in the new year (Mandarin: &lt;strong&gt;Íñýì??&lt;/strong&gt; (pronounced: &lt;em&gt;gong xi fa cai&lt;/em&gt;) / Cantonese: &lt;strong&gt;Íñýì??&lt;/strong&gt; (pronounced: &lt;em&gt;gong hei fat choy&lt;/em&gt;))! &lt;/p&gt;
+&lt;p&gt;That said, let&amp;rsquo;s get into this week&amp;rsquo;s epic roundup! There&amp;rsquo;s a ton of stuff.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;I was thrilled to participate in a discussion with AtomicJar&amp;rsquo;s Oleg Selajev &lt;a href="https://www.youtube.com/watch?v=1PUshxvTbAc"&gt;about Spring Boot and Testcontainers this morning&lt;/a&gt;. Don&amp;rsquo;t miss this! It was so much fun and we introduced a ton of cool goodies.&lt;/li&gt;
+  &lt;li&gt;I had a lot of fun speaking at the &lt;a href="https://www.youtube.com/watch?v=U-4RQ7LXZUk&amp;t=1s"&gt;JChampionsConference this morning&lt;/a&gt; about building &lt;strong&gt;Kubernetes Native Java&lt;/strong&gt;. It was a lot of fun! I spoke for nearly 60 minutes and then fielded questions from folks for half an hour after the show! And of course, the legendary &lt;a href="https://twitter.com/mgrygles"&gt;Mary Grygleski&lt;/a&gt; was a fantastic host and I loved catching up with her, too.&lt;/li&gt;
+  &lt;li&gt;I&amp;rsquo;ll be speaking at 11:00 AM GMT+3 on the 26th of January, 2022, to the Turkey Java Community. &lt;a href="https://twitter.com/turkeyjavacom/status/1483727602426777601"&gt;Join us!&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/a-bootiful-podcast-redhat-s-kate-stanley-on-the-distinction-between-traditional-brokers-and-apache-kafka"&gt;A Bootiful Podcast: RedHat&amp;rsquo;s Kate Stanley on the distinction between traditional brokers and Apache Kafka&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://medium.com/graalvm/graalvm-22-0-is-here-c7acc82a8c2e"&gt;GraalVM 22.0 is here&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://kubernetes.io/blog/2022/01/19/secure-your-admission-controllers-and-webhooks/"&gt;Blog: Securing Admission Controllers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/19/elastic-and-microsoft-azure-unified-observability-for-spring-boot-applications"&gt;Elastic and Microsoft Azure - Unified Observability for Spring Boot applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/19/spring-batch-5-0-m1-released"&gt;Spring Batch 5.0 M1 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/spring-boot-2-5-9-available-now"&gt;Spring Boot 2.5.9 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/spring-boot-2-6-3-is-now-available"&gt;Spring Boot 2.6.3 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/spring-boot-2-7-0-m1-is-now-available"&gt;Spring Boot 2.7.0-M1 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/spring-boot-3-0-0-m1-is-now-available"&gt;Spring Boot 3.0.0-M1 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/20/spring-data-jdbc-how-can-i-do-a-partial-update-of-an-aggregate-root"&gt;Spring Data JDBC - How Can I Do a Partial Update of an Aggregate Root?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/24/spring-initializr-0-12-0-available-now"&gt;Spring Initializr 0.12.0 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2022/01/19/spring-for-graphql-1-0-0-m5-released"&gt;Spring for GraphQL 1.0.0-M5 Released&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Initializr 0.12.0 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2022/01/24/spring-initializr-0-12-0-available-now" />
@@ -749,19 +781,6 @@ There are many levels on which you may choose to implement the desired behavior.
   &lt;li&gt;&lt;a href="https://dev.to/hackmamba/uploading-media-in-spring-boot-programmatically-with-cloudinary-35bm"&gt;Uploading Media in Spring Boot Programmatically With Cloudinary - DEV Community&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;There&amp;rsquo;s a new release of Project Reactor, &lt;a href="https://github.com/reactor/reactor/releases/tag/2020.0.15"&gt;that brings various libraries up to date!&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>A Bootiful Podcast: Spring Cloud cofounder Spencer Gibb (and happy new year!)</title>
-    <link rel="alternate" href="https://spring.io/blog/2022/01/06/a-bootiful-podcast-spring-cloud-cofounder-spencer-gibb-and-happy-new-year" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2022-01-06:4664</id>
-    <updated>2022-01-06T18:00:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans, and happy new year! In this installment, &lt;a href="https://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to Spring Cloud co-founder, legend, and the all-around nice guy &lt;a href="https://twitter.com/spencerbgibb"&gt;Spencer Gibb (@spencerbgibb)&lt;/a&gt;.&lt;/p&gt;
-&lt;iframe title="Spring Cloud cofounder Spencer Gibb (and happy new year!)" allowtransparency="true" height="150" width="100%" style="border: none; min-width: min(100%, 430px);" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/player-v2/?i=4f3rq-1171913-pb&amp;from=pb6admin&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;font-color=&amp;btn-skin=7"&gt;&lt;/iframe&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
