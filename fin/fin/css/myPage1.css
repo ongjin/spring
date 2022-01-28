@@ -27,4 +27,10 @@ tr > td:nth-of-type(2){width: 70%; display: grid;}
     .wish-page{margin-left: 20px;}
     .footer_wrap{display: none;}
     .profile{margin: 0 10px 0 10px;}
+
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
+
 }

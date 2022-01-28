@@ -4,6 +4,8 @@ const menuWarp = $("#menu-warp");
 const menuView = $("#menu-view");
 const menuAll = $("#menu-warp, #menu-view");
 
+
+
 let backupWidth = window.innerWidth;
 window.onresize = function(){
     var innerWidth = window.innerWidth;
@@ -12,12 +14,16 @@ window.onresize = function(){
     // $("#map") height == 웹 height
     $("#map").css("height", innerHeight);
 
-    if(innerWidth != backupWidth)   location.reload();
-
+    locationReolad(innerWidth, backupWidth);
+        
     backupWidth = innerWidth;
 
 }
 
+
+function locationReolad(now, backup){
+    if(now != backup)   location.reload();
+}
 
 
 

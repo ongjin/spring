@@ -32,6 +32,8 @@ input{border: 0.3px solid #ccc; border-radius: 5px;}
 input{outline: none;}
 .ph{text-align: center;}
 
+.update-img{text-align: center;}
+.update-img > img{border-radius: 50%; width: 8em; height: 8em; cursor: pointer;}
 
 @media screen and (max-width: 768px) and (min-width: 0px) {
 
@@ -42,8 +44,6 @@ input{outline: none;}
 
     #update, #cancel{width: 49%;}
     table{display: none;}
-    .update-img{text-align: center;}
-    .update-img > img{border-radius: 50%; width: 8em; height: 8em; cursor: pointer;}
 
     .update-info > div:nth-child(2){text-align: center; padding: 10px;}
     .update-info > div{padding-left: 10px;}
@@ -56,6 +56,12 @@ input{outline: none;}
 
     .pwSpan{margin-left: 30px; color: red;}
 
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
+
+    .update-info > .update-img{display: none;}
 
 }@media screen and (max-width: 950px) and (min-width: 768px)  {
     

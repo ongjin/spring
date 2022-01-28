@@ -17,6 +17,13 @@
     table{margin-left: 15px;}
 
     .mute-page{padding: 10px;}
+
+
+
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
     
 }@media screen and (max-width: 950px) and (min-width: 768px)  {
     

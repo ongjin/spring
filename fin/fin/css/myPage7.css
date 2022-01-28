@@ -106,4 +106,9 @@
     .main_content{padding: 0;}
     .board-page{margin-left: 20px;}
     .footer_wrap{display: none;}
+
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
 }

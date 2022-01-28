@@ -79,6 +79,11 @@ thead > tr > th:nth-child(4), td:nth-child(4){width: 25%;}
     .opImg > div:nth-of-type(2){position: absolute; top: 77px; right: 0px;}
     .opImg > div{visibility: hidden;}
 
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
+
 }@media screen and (max-width: 950px) and (min-width: 768px)  {
 
     table{font-size: 12px;}

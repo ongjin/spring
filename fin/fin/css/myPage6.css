@@ -28,4 +28,9 @@ input{outline: none;}
     .passtext, .password{display: none;}
     .secession-body{height: 200px; overflow: auto;}
 
+
+    .side_menu{display: inline-block;}
+    .side_menu > ul{display: flex;}
+    .side_menu > ul > li{width: 25%; text-align: start;}
+    .side_menu > ul > hr{display: none;}
 }

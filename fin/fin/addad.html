@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css" />
+    <link rel="stylesheet" href="css/common.css">
+    <script src="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.js"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#foo-table").DataTable();
+        });
+    </script>
+    <title></title>
+</head>
+
+<body>
+    <h1>관리자 페이지</h1>
+
+    <main>
+
+        <article class="dark-brown side_menu">
+            <h3>마이페이지</h3>
+            <ul>
+                <li><a href="#">마이상담</a> 
+                    <ul>
+                        <li><a href="#">상담 예약 조회</a></li>
+                    </ul>
+                </li>
+                <hr>
+                <li><a href="#">마이활동</a>
+                    <ul>
+                        <li><a href="#">게시글 내역</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </article>
+        
+        <div style="display: inline-block; width: 50%;">
+            <table id="foo-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">No</th>
+                        <th style="width: 10%;">ID</th>
+                        <th style="width: 30%;">Address</th>
+                        <th style="width: 5%;">Name</th>
+                        <th style="width: 20%;">TEL</th>
+                        <th style="width: 5%;">Secession(T/F)</th>
+                        <th style="width: 20%;">Register Date</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    
+                </tbody>
+            </table>
+            
+        </div>
+    </main>
+
+    <script>
+
+        // $("#foo-table").DataTable({
+        //     // 표시 건수기능 숨기기
+        //     lengthChange: false,
+        //     // 검색 기능 숨기기
+        //     searching: false,
+        //     // 정렬 기능 숨기기
+        //     ordering: false,
+        //     // 정보 표시 숨기기
+        //     info: false,
+        //     // 페이징 기능 숨기기
+        //     paging: false
+        // });
+
+        for (let i = 0; i < 999; i++) {
+            const tbody = $("#tbody");
+            const tr = $("<tr>");
+            const td1 = $("<td style='text-align: center;'>");
+            const td2 = $("<td>");
+            const td3 = $("<td>");
+            const td4 = $("<td>");
+            const td5 = $("<td>");
+            const td6 = $("<td>");
+            const td7 = $("<td>");
+
+            td1.text(i);
+            td2.text("user" + i);
+            td3.text("서울시 종로구" + i + "-" + (i + 55));
+            td4.text("유저" + i);
+            td5.text("010-2334-3333");
+
+            let ran = Math.floor(Math.random() * 2);
+            if (ran == 0) td6.text("T");
+            else td6.text("F");
+
+            if (i < 32) td7.text("2022-01-" + i);
+            else td7.text("2022-01-31");
+
+            tr.append(td1, td2, td3, td4, td5, td6, td7);
+
+            tbody.append(tr);
+
+        }
+
+
+        $.ajax({
+            url: "관리자",
+            type: "GET",
+            dataType: "JSON",
+            success: function (data) {
+
+                $('#foo-table').DataTable({
+                    data: data,
+                    columns: [
+                        { data: "memberNo" },
+                        { data: "memberEmail" },
+                        { data: "memberNm" },
+                        { data: "memberPw" }
+                    ],
+                    columnDefs: [
+                        {
+                            "targets": 4,
+                            "data": null,
+                            "render": function (data, type, row) {
+                                return '<button onclick="confirm(' + data.memberNo + ')">승인</button><button onclick="confirm(' + data.memberNo + ')">거절</button>';
+                            },
+                            "orderable": false
+                        },
+                        {
+                            "targets": 1,
+                            "data": null,
+                            "render": function (data, type, row) {
+                                console.log(data);
+                                return '<a href="#">' + data + '</a>';
+                            },
+                            "orderable": false
+                        }
+                    ]
+                })
+            }
+        });
+
+
+        // $("#foo-table").DataTable({
+        //     // order : [ [ 열 번호, 정렬 순서 ], ... ]
+        //     order: [[0, "asc"]]
+        // });
+
+    </script>
+</body>
+
+</html>
